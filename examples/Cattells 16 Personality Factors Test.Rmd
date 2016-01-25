@@ -10,7 +10,7 @@ output:
 runtime: shiny
 ---
 
-```{r}
+```{r, results='hide'}
   library( shinyLikert )
   data( cartell )
 ```
@@ -67,8 +67,8 @@ runtime: shiny
   rendered2 = renderShinyLikert( "ID 1",
         cartell_data , 
         input, output, 
-        dropdown = c("question_type","source","gender"),
-        #split = "gender",
+        dropdown = c("question_type","gender"),
+        split = "source",
         response_levels = c( #"missed",
                              "strongly disagree", 
                              "disagree", 
