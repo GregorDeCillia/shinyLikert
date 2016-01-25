@@ -2,7 +2,7 @@ renderTestTable = function( dataset, factors, currentFactors,
                             likert_split, split_factors )
 {
   #renderTable({
-    filtered = shinyLikert:::filterDataSet( dataset,
+    filtered = filterDataSet( dataset,
                               factors,
                               currentFactors() )
 
@@ -36,6 +36,6 @@ renderTestTable = function( dataset, factors, currentFactors,
       return( out )
     }
 
-    shinyLikert:::create_table( filtered$likert_data )
+    create_table( filtered$likert_data )
   #})
 }

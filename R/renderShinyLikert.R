@@ -14,6 +14,8 @@
 #'                    expr= "NULL",
 #'                    response_levels = levels( data$likert_data[,1] ),
 #'                    split_factors = NULL,
+#'                    group,
+#'                    grouping,
 #'                    ...
 #'                  )
 #'
@@ -32,7 +34,11 @@
 #' @param expr argument to be used by the shiny runtime
 #' @param response_levels answer possibilities of interest
 #' @param split_factors factors to be used in the HH plot
+#' @param group    variables to group the plot
+#' @param grouping chooses wether HH or likert will be used to display
+#'                 the result
 #' @param ... further arguments to be passed down to HH::likert
+#'
 #' @return  A list of rendered shiny objects which can be used as outputs.
 #' @examples
 #' x <- 1

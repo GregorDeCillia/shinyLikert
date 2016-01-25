@@ -14,6 +14,8 @@ renderShinyLikert( id, data,
                    expr= "NULL",
                    response_levels = levels( data$likert_data[,1] ),
                    split_factors = NULL,
+                   group,
+                   grouping,
                    ...
                  )
 }
@@ -43,6 +45,11 @@ will create a slider to control the height of the plot.}
 \item{response_levels}{answer possibilities of interest}
 
 \item{split_factors}{factors to be used in the HH plot}
+
+\item{group}{variables to group the plot}
+
+\item{grouping}{chooses wether HH or likert will be used to display
+the result}
 
 \item{...}{further arguments to be passed down to HH::likert}
 }

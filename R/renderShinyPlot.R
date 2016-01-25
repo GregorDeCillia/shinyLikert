@@ -47,7 +47,7 @@ renderShinyPlot = function( data_set, input, factors,
                         list( x = likert_table,
                               ... )
                         )
-    require(HH)
+
     #cat( is.null( split_factors ) )
     if( !is.null( likert_split ) ){
       td = likert::likert( filtered$likert_data,
