@@ -14,12 +14,11 @@ runtime: shiny
 
 To create a shiny widget the data is assumed to be of class `likertData`, which basically consists of three data frames.
 
-```{r, results='hide'}
+```{r, results='hide', message=FALSE}
   library('knitr')
   #library(shinyLikert)      # load the package from installed library
   require( 'devtools' )
   devtools::load_all( ".." ) # load the package from source
-  data( testData2 )
   testData2 = createTestData( participants = 100, 
                               questions    = 10, 
                               input, 

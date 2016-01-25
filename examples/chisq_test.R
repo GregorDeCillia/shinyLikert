@@ -10,3 +10,9 @@ for ( i in 1:nquestions )
                      simulate.p.value = TRUE )$p.value
 # Expect equal distribution
 hist( x )
+
+load("data_nobuild/cartell.rda")
+data = cartell_data
+chisq.test( data$likert_data[1:1000,1],
+            data$row_factors[1:1000,4],
+            simulate.p.value = TRUE )$p.value
