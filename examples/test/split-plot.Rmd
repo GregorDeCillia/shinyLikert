@@ -6,7 +6,7 @@ output: html_document
 runtime: shiny
 ---
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, results='hide'}
 require( 'devtools' )
   devtools::load_all( ".." )
 ```
