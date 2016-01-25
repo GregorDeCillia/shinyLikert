@@ -1,0 +1,18 @@
+{
+    "contents" : "renderShinyPlot = function( data_set, input, factors,\n                            currentFactors, questions, height, id,\n                            response_levels,\n                            split_factors,\n                            likert_split,\n                            grouping,\n                            output,\n                            env = parent.frame(),\n                            ...\n){\n  reactiveLikertTable = reactive({\n    renderTestTable( data_set, factors, currentFactors,\n                     likert_split, split_factors )\n\n  })\n\n  out = renderPlot({\n    if( is.null( currentFactors() ) && length( factors ) != 0 )\n      return( NULL )\n\n    # filter the data according to the dropbox inputs\n    filtered = filterDataSet( data_set,\n                              factors,\n                              currentFactors()\n    )\n\n    # in case of an ordinary plot\n    likert_table = create_table( filtered$likert_data,\n                                 response_levels )\n\n    output[[ paste0(id, \".factorTable\" ) ]] =\n      renderTable( likert_table )\n\n    # in case of a split-plot\n    likert_table2 = create_factorized_table( filtered,\n                                             split_factors,\n                                             response_levels )\n\n\n    if( is.null( likert_table2 ) && length( factors ) != 0 ) # triggers when impossible factor\n      # combinations are chosen\n      return( NULL )\n\n    # set default arguments\n    defaults <- list( main = currentFactors() )\n    args <- modifyList( defaults,\n                        list( x = likert_table,\n                              ... )\n                        )\n    require(HH)\n    #cat( is.null( split_factors ) )\n    if( !is.null( likert_split ) ){\n      td = likert::likert( filtered$likert_data,\n                           grouping = filtered$row_factors[ , likert_split ] )\n      if( grouping == \"HH\" )\n        return( HH::likert( td ) )\n      return( likert.bar.plot( td ) )\n    }\n\n    if( is.null( split_factors ) ){\n      print( likert_table )\n      return( do.call( getFromNamespace(\"likert\",\"HH\"), args ) )\n    }\n\n    if( !is.null( split_factors ) ){\n      print( likert_table2 )\n      HH::likert( level ~ . | factor, likert_table2,\n              scales = list( cex = 1,\n                             y = list( relation = \"free\" )\n              ),\n              main = currentFactors(),\n              strip.left = strip.custom( bg = \"gray85\" ),\n              par.strip.text = list( cex = 1, lines = 5 ),\n              layout = c( 1, length( split_factors ) + 1  ),\n              strip = FALSE,\n              ylab = NULL,\n              ...\n      )\n    }\n\n  },\n  height = function(){\n    if( is.null( height ) )\n      return( 450 )\n    high = input[[ paste0( id, \".height\" ) ]]\n    if( is.null( high ) )\n      return( 450 )\n    return ( high )\n  }\n  )\n  return( list( plot = out,\n                table = renderTable({\n                  likert_table = reactiveLikertTable()\n                  })\n                )\n          )\n}\n",
+    "created" : 1453085972959.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "284256443",
+    "id" : "E8A428A7",
+    "lastKnownWriteTime" : 1453692072,
+    "path" : "C:/Users/grogon/workspace/shinyLikert/R/renderShinyPlot.R",
+    "project_path" : "R/renderShinyPlot.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 13,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

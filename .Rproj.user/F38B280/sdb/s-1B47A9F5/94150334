@@ -1,0 +1,18 @@
+{
+    "contents" : "renderSelector = function( id,\n                           factor_id,\n                           factor_levels,\n                           selected = factor_levels[1] ){\n\n    selectInput(\n      paste0( id, factor_id ),\n      label    = factor_id,\n      choices  = factor_levels ,\n      selected = selected,\n      width    = '100%'\n    )\n}\n",
+    "created" : 1453514831652.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3352037459",
+    "id" : "94150334",
+    "lastKnownWriteTime" : 1453514872,
+    "path" : "C:/Users/grogon/workspace/shinyLikert/R/renderSelector.R",
+    "project_path" : "R/renderSelector.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

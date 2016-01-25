@@ -1,0 +1,18 @@
+{
+    "contents" : "filterDataSet = function( data_set,\n  # likert_data,\n                        #  row_factors,\n                        #  column_factors  = NULL,\n                          active_factors = NULL,\n                          active_levels  = NULL )\n{\n  if ( length( active_factors ) == 0 ){\n    return( data_set )\n#    cat( \"back to the sender!\" )\n#    out = list( likert_data, row_factors, column_factors )\n#    names(out) = c( \"likert_data\", \"row_factors\", \"column_factors\" )\n\n#    return( out )\n    #return( likert_data )\n  }\n  for ( i in 1:length( active_factors ) ){\n    if( active_factors[i] %in% names( data_set$row_factors ) )\n    {\n      subset = data_set$row_factors[[active_factors[i] ]] == active_levels[i]\n      data_set$likert_data = subset( data_set$likert_data, subset )\n      data_set$row_factors = subset( data_set$row_factors, subset )\n    }\n    if( active_factors[i] %in% names( data_set$column_factors ) ){\n      subset = data_set$column_factors[[ active_factors[i] ]] == active_levels[i]\n      subset = replace( subset, is.na( subset ), FALSE )\n      if( sum( subset ) == 1 ){\n        #name = names( likert_data )[subset]\n        #likert_data = data.frame( likert_data[ , subset ] )\n        #names( likert_data ) = name\n        data_set$likert_data = subset( data_set$likert_data,\n                                       select = subset )\n      }\n      if( sum(subset) != 1 )\n        data_set$likert_data = data_set$likert_data[ , subset ]\n      data_set$column_factors = data_set$column_factors[ subset,  ]\n      #FALSE\n    }\n  }\n  #out = list( likert_data, row_factors, column_factors )\n  #names(out) = c( \"likert_data\", \"row_factors\", \"column_factors\" )\n\n  #return( out )\n  return( data_set )\n\n  #return( likert_data )\n\n}\n",
+    "created" : 1453520993725.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4193329673",
+    "id" : "654DFA4C",
+    "lastKnownWriteTime" : 1453530120,
+    "path" : "C:/Users/grogon/workspace/shinyLikert/R/filterDataSet.R",
+    "project_path" : "R/filterDataSet.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

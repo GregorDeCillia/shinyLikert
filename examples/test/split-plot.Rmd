@@ -1,0 +1,26 @@
+---
+title: "Untitled"
+author: "Gregor de Cillia"
+date: "January 23, 2016"
+output: html_document
+runtime: shiny
+---
+
+```{r, echo=FALSE}
+require( 'devtools' )
+  devtools::load_all( ".." )
+```
+
+```{r}
+testData2 = createTestData( participants = 100, 
+                            questions    = 10, 
+                            input, 
+                            output )
+  fluidPage( 
+    renderShinyLikert( "abc", testData2,
+                       split = c("country", "difficulty", "gender"),
+                       positive.order = TRUE )
+  )
+```
+
+lalalala

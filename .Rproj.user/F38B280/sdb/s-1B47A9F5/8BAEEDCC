@@ -1,0 +1,18 @@
+{
+    "contents" : "create_factorized_table = function( data_set,\n                                    split_factors,\n                                    response_levels = levels(\n                                      data_set$likert_data[,1]\n                                      ),\n                                    accumulate = TRUE\n                                    )\n{\n  out = create_table( data_set$likert_data, response_levels )\n  if( is.null(out) || dim( out )[1]==0 || dim(out)[2] == 0 )\n    return( NULL )\n  #if( accumulate ){\n    out = colSums( out )\n    out = data.frame( cbind( t( out ) ), \"all\", \"\", stringsAsFactors = FALSE )\n  #}\n  #if ( accumulate )\n    names(out) = c( response_levels, \"factor\", \"level\" )\n  #if  (!accumulate)\n  #  names(out) = c( response_levels, \"question\", split_factors[1] )\n\n\n  for ( factor in split_factors ){\n    if ( factor %in% names( data_set$row_factors ) )\n      current_levels = levels( data_set$row_factors[[factor]] )\n    if ( factor %in% names( data_set$column_factors ) )\n      current_levels = levels( data_set$column_factors[[factor]] )\n    for ( level in current_levels ){\n      newout = create_table( filterDataSet( data_set,\n                                            factor,\n                                            level\n                                            )$likert_data,\n                             response_levels )\n      if( accumulate ){\n      newout = colSums( newout )\n      newout = data.frame( cbind( t(newout) ,\n                                  factor,\n                                  level ),\n                           stringsAsFactors = FALSE )\n      }\n      if( !accumulate )\n        newout = data.frame( cbind( newout ,\n                                    rownames(newout),\n                                    level ),\n                             stringsAsFactors = FALSE )\n      names(newout) = c( response_levels, \"factor\", \"level\" )\n      out = rbind( out, newout )\n    }\n\n  }\n  out$factor = as.factor( out$factor )\n  out$level  = as.factor( out$level )\n\n  for ( response in response_levels )\n    out[,response] = as.numeric( out[ ,response ] )\n\n  # HH::likert( level ~ . | factor , tabular,\n  #             scales=list(y=list(relation=\"free\")), layout=c(1,2) )\n\n  return( out )\n}\n",
+    "created" : 1453108408608.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3186537967",
+    "id" : "8BAEEDCC",
+    "lastKnownWriteTime" : 1453691697,
+    "path" : "C:/Users/grogon/workspace/shinyLikert/R/create_factorized_table.R",
+    "project_path" : "R/create_factorized_table.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

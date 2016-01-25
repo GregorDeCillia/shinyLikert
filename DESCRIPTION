@@ -1,0 +1,21 @@
+Package: shinyLikert
+Version: 0.5-1
+Date: 2015-01-01
+Title: My First Collection of Functions
+Authors@R: c(person("Gregor", "de Cillia", role = c("aut", "cre"),
+		     email = "Joe.Developer@some.domain.net"),
+	      person("Matthias", "Templ", role = "aut") )
+Author: Gregor de Cillia [aut,cre], Matthias templ [aut]
+Maintainer: Gregor de Cillia <de.cillia.gregor@gmail.com>
+Depends:
+    R (>= 2.10.0),
+    shiny,
+    HH,
+    likert
+Suggests:
+    MASS
+Description: Interactive wrapper for the HH package.
+License: GPL (>= 2)
+URL: https://www.r-project.org, http://www.another.url
+BugReports: https://pkgname.bugtracker.url
+RoxygenNote: 5.0.1

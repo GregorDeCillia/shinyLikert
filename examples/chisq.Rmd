@@ -1,0 +1,34 @@
+---
+title: "chisq"
+author: "Gregor de Cillia"
+date: "January 25, 2016"
+output: html_document
+runtime: shiny
+---
+
+```{r, echo=FALSE, results ='hide'}
+library( shinyLikert )
+testData2 = createTestData( 100, 10, input, output )
+```
+
+
+```{r}
+    fluidPage( 
+      renderShinyLikert( "ID 7.5",
+        testData2,
+        split    = c( "difficulty", "gender", "country" ),
+        positive.order = TRUE   # ???
+      ) 
+    )
+```
+
+```{r}
+    fluidPage( 
+      renderShinyLikert( "ID 10",
+        testData2,
+        height  = c(500,800),
+        dropdown = c("gender","difficulty"),
+        group = "country"
+      ) 
+    )
+```

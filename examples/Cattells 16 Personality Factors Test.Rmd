@@ -1,0 +1,84 @@
+---
+title: "Examples"
+author: "Gregor de Cillia"
+date: "January 18, 2016"
+output: 
+  html_document: 
+    highlight: textmate
+    theme: united
+    toc: yes
+runtime: shiny
+---
+
+```{r}
+  library( shinyLikert )
+  data( cartell )
+```
+
+
+```{r, eval = FALSE, echo=FALSE, results='hide'}
+ data <- read.delim("C:/Users/grogon/Downloads/data.csv")
+ source( "C:/Users/grogon/workspace/shinyLikert/examples/cartell_questions.R" )
+ question_columns = 1:163
+ factor_columns   = c( "age", "gender", "country", "source" ) 
+ 
+ question_factors = substr( names( data[,question_columns] ), 1, 1)
+ 
+ library( shinyLikert )
+ #
+ ld = createLikertData( data[ , question_columns ],
+                        data[ , factor_columns ],
+                        data.frame(  question_type = question_factors ),
+                        c( "missed",
+                           "strongly disagree", 
+                           "disagree", 
+                           "neither agree not disagree", 
+                           "agree", 
+                           "strongly agree" )
+                   )
+
+ question_factors = substr( names( ld$likert_data ), 1, 1)
+ names(ld$likert_data) = cartell_questions
+ 
+ 
+ 
+ 
+ levels( ld$row_factors$country ) = c( levels( ld$row_factors$country ), 
+                                       "unanswered" )
+ ld$row_factors$country[ is.na( ld$row_factors$country ) ] = "unanswered"
+ levels( ld$row_factors$gender ) = c( "NA",
+                                      "Male",
+                                      "Female",
+                                      "Other"
+                                      )
+ 
+ c( "from front page of website that hosted the survey",
+    "from google",
+    "facebook",
+    "any url containing '.edu'",
+    "wikipedia",
+    "other source or empty source")
+
+```
+
+```{r}
+ # summary( cartell_data )
+ 
+  rendered2 = renderShinyLikert( "ID 1",
+        cartell_data , 
+        input, output, 
+        dropdown = c("question_type","source","gender"),
+        #split = "gender",
+        response_levels = c( #"missed",
+                             "strongly disagree", 
+                             "disagree", 
+                             "neither agree not disagree", 
+                             "agree", 
+                             "strongly agree" ),
+        as.percent = TRUE
+  )
+  rendered2$selector
+  rendered2$plot 
+ 
+```
+

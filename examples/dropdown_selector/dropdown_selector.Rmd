@@ -1,0 +1,35 @@
+---
+title: "Untitled"
+author: "Gregor de Cillia"
+date: "January 23, 2016"
+output: html_document
+runtime: shiny
+---
+
+```{r}
+
+  row_factors = data.frame( country = factor(c("AUT","GER","ENG","AUT")),
+                            gender  = factor( c("M","F","M","F") ),
+                            color   = factor( c("red", "red","blue","green" ))
+                            )
+  output$button1 = renderUI({
+    cat("rendering: c = ", input$country, " G = ", input$gender,"\n", str(input) )
+    selectInput( "country", "country",
+                 ifelse( is.null(input$gender),
+                         levels( row_factors$country ),
+                         levels( factor(row_factors$country[ row_factors$gender == input$gender])
+                                 ) ),
+                 ifelse( is.null(input$country),
+                         levels( row_factors$country )[1],
+                         input$country )
+  ) })
+  output$gender = renderUI(
+    selectInput( "gender", "gender",
+                 levels( factor( row_factors$gender[ row_factors$country == input$country ] ) ),
+                 input$gender )
+  )
+  
+  uiOutput("button1")
+  uiOutput("gender")
+  
+```

@@ -1,0 +1,17 @@
+{
+    "contents" : "# Hello, world!\n#\n# This is an example function named 'hello'\n# which prints 'Hello, world!'.\n#\n# You can learn more about package authoring with RStudio at:\n#\n#   http://r-pkgs.had.co.nz/\n#\n# Some useful keyboard shortcuts for package authoring:\n#\n#   Build and Reload Package:  'Ctrl + Shift + B'\n#   Check Package:             'Ctrl + Shift + E'\n#   Test Package:              'Ctrl + Shift + T'\n\ncreate_table = function( dataset, responselevels = NULL ){\n    if( is.null( dim( dataset ) ) || dim( dataset )[2] == 0 )\n        return ( NULL )\n\n    if ( is.null(responselevels)[1] )\n      responselevels =  levels( dataset[, 1 ] )   # fixme: what if levels are missing?\n\n    out = NULL\n    for ( i in 1:dim(dataset)[2] ){\n      tmp = rep( NA, length(responselevels) )\n      for ( j in 1:length(responselevels) )\n        tmp[j] = sum( dataset[,i]==responselevels[j] )\n      out = rbind( out, tmp )\n    }\n    colnames(out) = responselevels\n    rownames(out) = colnames(dataset)\n\n    cat(\"normal return\")\n\n    return(out)\n  }\n",
+    "created" : 1453315597041.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3858531349",
+    "id" : "3BF4E478",
+    "lastKnownWriteTime" : 1453527610,
+    "path" : "C:/Users/grogon/workspace/shinyLikert/R/create_table.R",
+    "project_path" : "R/create_table.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
