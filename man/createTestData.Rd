@@ -4,7 +4,7 @@
 \alias{createTestData}
 \title{createTestData}
 \usage{
-createTestData(participants, questions, input, output,
+createTestData(participants, questions, input = NA, output = NA,
   participant_factors = list(country = c("US", "AT", "CH"), gender = c("Male",
   "Female"), position = c("Programmer", "Project leader", "Salesman")),
   question_factors = list(difficulty = c("easy", "hard"), skill = c("logic",

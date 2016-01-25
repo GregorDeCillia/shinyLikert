@@ -22,8 +22,8 @@
 #' @export
 createTestData = function( participants,
                            questions,
-                           input,
-                           output,
+                           input = NA,
+                           output = NA,
                            participant_factors = list( country = c("US","AT","CH"),
                                                        gender = c("Male", "Female" ),
                                                        position = c("Programmer",
