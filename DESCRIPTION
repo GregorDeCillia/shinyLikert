@@ -7,9 +7,9 @@ Authors@R: c(person("Gregor", "de Cillia", role = c("aut", "cre"),
 	      person("Matthias", "Templ", role = "aut") )
 Author: Gregor de Cillia [aut,cre], Matthias templ [aut]
 Maintainer: Gregor de Cillia <de.cillia.gregor@gmail.com>
+Imports: shiny
 Depends:
     R (>= 2.10.0),
-    shiny,
     HH,
     likert
 Suggests:
