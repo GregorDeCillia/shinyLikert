@@ -10,9 +10,10 @@ output:
 runtime: shiny
 ---
 
-```{r, results='hide'}
+```{r, results='hide', message=FALSE}
   library( shinyLikert )
-  data( cartell )
+  #data( cartell )
+  load( "../data_nobuild/cartell.rda")
 ```
 
 
@@ -64,21 +65,48 @@ runtime: shiny
 ```{r}
  # summary( cartell_data )
  
+ cartell_data$column_factors = cbind( cartell_data$column_factors,
+                                      question = names(cartell_data$likert_data)
+  )
+ cartell_data$likert_data  = cartell_data$likert_data[1:2000,]
+ cartell_data$row_factors  = cartell_data$row_factors[1:2000,]
+
   rendered2 = renderShinyLikert( "ID 1",
         cartell_data , 
         input, output, 
-        dropdown = c("question_type","gender"),
-        split = "source",
+        dropdown = c("question" ),
+        split = c("source","gender"),
         response_levels = c( #"missed",
                              "strongly disagree", 
                              "disagree", 
                              "neither agree not disagree", 
                              "agree", 
                              "strongly agree" ),
-        as.percent = TRUE
+        as.percent = TRUE,
+        positive.order = TRUE
   )
   rendered2$selector
   rendered2$plot 
  
 ```
 
+```{r}
+  # replace missing answers with NAs
+  i = 1
+  for( question in cartell_data$likert_data ){
+    question[question == "missed"] = NA
+    cartell_data$likert_data[,i] = factor( question )
+    i = i + 1
+  }
+
+  fluidPage(
+  renderShinyLikert( "ID 2",
+        cartell_data,
+        input, output,
+        dropdown = c("question_type" ),
+        group = "gender",
+        as.percent = TRUE,
+        height = c(750,1500)
+  )
+  )
+```
