@@ -26,6 +26,14 @@ To create a shiny widget the data is assumed to be of class `likertData`, which 
 
 ```
 
+```{r, results='hide', echo=FALSE}
+ testData3 = createTestData( participants = 100, 
+                              questions    = 10 )
+ fluidPage( 
+    renderShinyLikert( testData3 )  
+  )
+```
+
 The structure of the data is as follows
 
 ```{r}
@@ -192,13 +200,6 @@ To control the height of the plot, use the option `height = c( height_min, heigh
     )
 ```
 
-You can also copy the plot above, like so
-
-
-```{r}
-  #plotOutput( "ID 5.plot" )
-```
-
 ## Responselevels
 
 To get a custom order for the responses, use the responselevels parameter
@@ -208,14 +209,14 @@ To get a custom order for the responses, use the responselevels parameter
       renderShinyLikert( 
         testData2,
         dropdown = "gender",
-        response_levels = c( "Strongly agree", "Agree", "Neutral" )
+        response_levels = c( "Strongly Agree", "Agree", "Neutral" )
       ) 
     )
 ```
 
 ## Pass arguments to `HH::likert`
 
-You can also pass arguments down to `HH::likert`
+You can also pass down arguments down to `HH::likert`
 
 ```{r}
     fluidPage( 
