@@ -30,7 +30,5 @@ create_table = function( dataset, responselevels = NULL ){
     colnames(out) = responselevels
     rownames(out) = colnames(dataset)
 
-    cat("normal return")
-
     return(out)
   }
