@@ -1,6 +1,5 @@
 # The shinyLikert package
 Gregor de Cillia  
-January 26, 2016  
 
 This pakage lets you create shiny widgets for likert scal data with simple syntax. Typacal plots created by this library look like this
 
