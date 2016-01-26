@@ -32,8 +32,8 @@
 #' @export
 createTestData = function( participants,
                            questions,
-                           input = NA,
-                           output = NA,
+                           input = NULL,
+                           output = NULL,
                            participant_factors = list( country = c("US","AT","CH"),
                                                        gender = c("Male", "Female" ),
                                                        position = c("Programmer",
