@@ -22,6 +22,8 @@ renderFactorOverview(data, id = toString(paste0("id", sample(1:10000, 1))),
 \item{quoted}{argument for shiny session}
 
 \item{expr}{argument for shiny session}
+
+\item{...}{argument for shiny session}
 }
 \description{
 Create widgets to visualize the factor variables
