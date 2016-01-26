@@ -7,6 +7,7 @@
 #' @param env    argument for shiny session
 #' @param quoted argument for shiny session
 #' @param expr   argument for shiny session
+#' @param ...    argument for shiny session
 #' @export
 #'
 renderFactorOverview = function(
