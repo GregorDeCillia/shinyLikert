@@ -9,6 +9,7 @@ Author: Gregor de Cillia [aut,cre], Matthias templ [aut]
 Maintainer: Gregor de Cillia <de.cillia.gregor@gmail.com>
 Imports: shiny
 Depends:
+    ggvis,
     R (>= 2.10.0),
     HH,
     likert
