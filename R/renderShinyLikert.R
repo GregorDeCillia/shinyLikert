@@ -121,41 +121,19 @@ renderShinyLikert = function( id,
                           ... )
 
   plot = outs$plot
-  cat( "TABLE SIZE\n"  )
-  #cat( dim( outs$table ), "\n\n\n" )
-  #output[[ paste0(id, ".factorTable" ) ]] = outs$table
-  cat( paste0(id, ".factorTable" ) )
   table = outs$table
 
   output[[paste0(id,".plot")]] = plot
 
-  selector3 = reactive({
-    selector21 = selector2()
-  if ( length( selector21 ) == 0 )
-    return( NULL )
-  if ( length( selector21 ) == 1 )
-    return( selector3 = inputPanel(  selector21[[1]] ) )
-  if( length( selector21 ) == 2 )
-    return( inputPanel(  selector21[[1]], selector21[[2]] ) )
-  if( length( selector21 ) == 3 )
-    return( inputPanel(  selector21[[1]],
-                             selector21[[2]],
-                             selector21[[3]] )
-    )
-  if( length( selector21 ) == 4 )
-    return( inputPanel(  selector21[[1]],
-                             selector21[[2]],
-                             selector21[[3]],
-                             selector21[[4]] ) )
+  # use an inputPanel container for the inputs
+  selector9 = renderUI({
+    selector4 = selector2()
+    names( selector4 ) = NULL
+    do.call( "inputPanel", selector4 )
   })
 
-  #selector4 = selector2
-  #names( selector4 ) = NULL
-  #selector3 = do.call( "inputPanel", c( selector2, cellArgs = list() ) )
-
-
   list(
-        selector = renderUI( selector3() ),
+        selector = selector9,
         plot = renderUI({ tabsetPanel(
           tabPanel( "plot",
                     plot
