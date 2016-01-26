@@ -34,3 +34,5 @@ devtools::install_github("gregorDeCillia/shinyLikert")
 ```
 
 [my website]:  http://gregor-de-cillia.xyz/shiny/shinyLikert/examples/
+
+<p style='text-align:right;'>[$\Uparrow$](./../)</p>
