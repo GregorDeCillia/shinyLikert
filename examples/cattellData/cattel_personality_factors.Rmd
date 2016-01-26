@@ -78,7 +78,6 @@ runtime: shiny
 
   rendered2 = renderShinyLikert(
         cartell_data , 
-        input, output, 
         dropdown = c("question" ),
         split = c("source","gender"),
         response_levels = c( #"missed",
@@ -107,7 +106,6 @@ runtime: shiny
   fluidPage(
   renderShinyLikert(
         cartell_data,
-        input, output,
         dropdown = c("question_type" ),
         group = "gender",
         as.percent = TRUE,
