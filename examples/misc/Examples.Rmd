@@ -16,9 +16,9 @@ To create a shiny widget the data is assumed to be of class `likertData`, which 
 
 ```{r, results='hide', message=FALSE}
   library('knitr')
-  #library(shinyLikert)      # load the package from installed library
-  require( 'devtools' )
-  devtools::load_all( "../.." ) # load the package from source
+  library(shinyLikert)      # load the package from installed library
+  #require( 'devtools' )
+  #devtools::load_all( "../.." ) # load the package from source
   testData2 = createTestData( participants = 100, 
                               questions    = 10, 
                               input, 
