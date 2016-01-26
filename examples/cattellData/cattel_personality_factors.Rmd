@@ -13,7 +13,7 @@ runtime: shiny
 ```{r, results='hide', message=FALSE}
   library( shinyLikert )
   #data( cartell )
-  load( "../data_nobuild/cartell.rda")
+  load( "../../data_nobuild/cartell.rda")
 ```
 
 
@@ -64,6 +64,11 @@ runtime: shiny
 
 ```{r}
  # summary( cartell_data )
+ cartell_data$input  = input
+ cartell_data$output = output
+ fluidPage(
+   renderFactorOverview( cartell_data )
+ )
  
  cartell_data$column_factors = cbind( cartell_data$column_factors,
                                       question = names(cartell_data$likert_data)
@@ -71,7 +76,7 @@ runtime: shiny
  cartell_data$likert_data  = cartell_data$likert_data[1:2000,]
  cartell_data$row_factors  = cartell_data$row_factors[1:2000,]
 
-  rendered2 = renderShinyLikert( "ID 1",
+  rendered2 = renderShinyLikert(
         cartell_data , 
         input, output, 
         dropdown = c("question" ),
@@ -100,7 +105,7 @@ runtime: shiny
   }
 
   fluidPage(
-  renderShinyLikert( "ID 2",
+  renderShinyLikert(
         cartell_data,
         input, output,
         dropdown = c("question_type" ),

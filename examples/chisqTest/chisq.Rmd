@@ -14,7 +14,7 @@ testData2 = createTestData( 100, 10, input, output )
 
 ```{r}
     fluidPage( 
-      renderShinyLikert( "ID 7.5",
+      renderShinyLikert( 
         testData2,
         split    = c( "difficulty", "gender", "country" ),
         positive.order = TRUE   # ???
@@ -24,7 +24,7 @@ testData2 = createTestData( 100, 10, input, output )
 
 ```{r}
     fluidPage( 
-      renderShinyLikert( "ID 10",
+      renderShinyLikert( 
         testData2,
         height  = c(500,800),
         dropdown = c("gender","difficulty"),

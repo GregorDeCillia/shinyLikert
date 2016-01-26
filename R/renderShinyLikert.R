@@ -58,8 +58,7 @@
 #' # )
 #' @export
 #' @author Gregor de Cillia
-renderShinyLikert = function( id,
-                              data,
+renderShinyLikert = function( data,
                               input = data$input,
                               output = data$output,
                               dropdown_factors = NULL,
@@ -72,6 +71,8 @@ renderShinyLikert = function( id,
                               split_factors = NULL,
                               group = NULL,
                               grouping = "likert",
+                              id = toString(paste0("id",
+                                                   sample(1:10000, 1))),
                               ... ){
   valid_factors = c( names(data$row_factors), names(data$"column_factors") )
 
