@@ -4,7 +4,7 @@
 \alias{renderShinyLikert}
 \title{Shiny likert}
 \usage{
-renderShinyLikert( id, data,
+renderShinyLikert( data,
                    input, output,
                    dropdown_factors = NULL,
                    questions = names( data$likert_data ),
@@ -16,13 +16,11 @@ renderShinyLikert( id, data,
                    split_factors = NULL,
                    group,
                    grouping,
+                   id,
                    ...
                  )
 }
 \arguments{
-\item{id}{A string definig the id of the output. The id has to be
-unique within your project}
-
 \item{data}{An object of type likertData to be plotted}
 
 \item{input, output}{options to be passed down from the following call \cr
@@ -50,6 +48,9 @@ will create a slider to control the height of the plot.}
 
 \item{grouping}{chooses wether HH or likert will be used to display
 the result}
+
+\item{id}{A string definig the id of the output. The id has to be
+unique within your project}
 
 \item{...}{further arguments to be passed down to HH::likert}
 }

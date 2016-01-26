@@ -4,7 +4,7 @@
 #' shinyApp() or inside an ShinyMarkdown document
 #'
 #' @usage
-#' renderShinyLikert( id, data,
+#' renderShinyLikert( data,
 #'                    input, output,
 #'                    dropdown_factors = NULL,
 #'                    questions = names( data$likert_data ),
@@ -16,6 +16,7 @@
 #'                    split_factors = NULL,
 #'                    group,
 #'                    grouping,
+#'                    id,
 #'                    ...
 #'                  )
 #'
