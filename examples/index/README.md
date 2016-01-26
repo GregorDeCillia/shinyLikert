@@ -17,9 +17,9 @@ Link            | Description
 [factorOverview]| Demonstration of the `renderFactorOverview` function
 
 
-[cattellData]: cattellData
-[misc]:        misc
+[cattellData]: cattellData/
+[misc]:        misc/
 [Cattell's 16 Personality Factors Test]: http://personality-testing.info/tests/16PF.php
 [here]:        http://personality-testing.info/_rawdata/
-[chisqTest]:   chisqTest
-[factorOverview]: factorOverview
+[chisqTest]:   chisqTest/
+[factorOverview]: factorOverview/
