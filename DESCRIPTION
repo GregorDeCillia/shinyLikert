@@ -1,7 +1,7 @@
 Package: shinyLikert
 Version: 0.5-1
 Date: 2015-01-01
-Title: My First Collection of Functions
+Title: The shinyLikert package
 Authors@R: c(person("Gregor", "de Cillia", role = c("aut", "cre"),
 		     email = "Joe.Developer@some.domain.net"),
 	      person("Matthias", "Templ", role = "aut") )
