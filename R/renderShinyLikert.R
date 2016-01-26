@@ -75,6 +75,16 @@ renderShinyLikert = function( data,
                               id = toString(paste0("id",
                                                    sample(1:10000, 1))),
                               ... ){
+  if( is.null( input ) || is.null( output ) ){
+    message("non interactive session\n")
+    data = likert::likert( data$likert_data )$results
+    return( list( plot = renderPlot({
+      HH::likert( x = data,
+                  main = deparse( substitute( data ) ) )
+      })
+                  ) )
+  }
+
   valid_factors = c( names(data$row_factors), names(data$"column_factors") )
 
   for ( factor in c( dropdown_factors, split_factors ) )
