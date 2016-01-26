@@ -5,7 +5,6 @@
 #'
 #' @usage
 #' renderShinyLikert( data,
-#'                    input, output,
 #'                    dropdown_factors = NULL,
 #'                    questions = names( data$likert_data ),
 #'                    height = NULL,
@@ -23,8 +22,6 @@
 #' @param id A string definig the id of the output. The id has to be
 #' unique within your project
 #' @param data An object of type likertData to be plotted
-#' @param input,output options to be passed down from the following call \cr
-#' shinyApp( ui=..., server = function( input,output, session )\{ ... \} )
 #' @param dropdown_factors names ot the factors which should be used as for
 #' the dropdown menus
 #' @param questions the questions that should be displayed. (Currently broken)
@@ -60,8 +57,6 @@
 #' @export
 #' @author Gregor de Cillia
 renderShinyLikert = function( data,
-                              input = data$input,
-                              output = data$output,
                               dropdown_factors = NULL,
                               questions = names( data$likert_data ),
                               height = NULL,
@@ -75,6 +70,8 @@ renderShinyLikert = function( data,
                               id = toString(paste0("id",
                                                    sample(1:10000, 1))),
                               ... ){
+  input = data$input
+  output = data$output
   if( is.null( input ) || is.null( output ) ){
     message("non interactive session\n")
     data = likert::likert( data$likert_data )$results
@@ -117,19 +114,24 @@ renderShinyLikert = function( data,
     return( out )
   })
 
+  # create filtered version of dataset
+  filtered_data = reactive({
+    filterDataSet( data,
+                   dropdown_factors,
+                   currentFactors()
+    )
+  })
+
   # create ouputs
-  outs = renderShinyPlot( data,
-                          input,
-                          dropdown_factors,
+  outs = renderShinyPlot( dropdown_factors,
                           currentFactors,
-                          questions,
                           height,
                           id,
                           response_levels,
                           split_factors,
                           group,
                           grouping,
-                          output,
+                          filtered_data,
                           ... )
 
   plot = outs$plot

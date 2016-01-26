@@ -1,11 +1,7 @@
-renderTestTable = function( dataset, factors, currentFactors,
+renderTestTable = function( filtered,
                             likert_split, split_factors )
 {
   #renderTable({
-    filtered = filterDataSet( dataset,
-                              factors,
-                              currentFactors() )
-
     if( !is.null( likert_split ) ){
       out = create_factorized_table( filtered,
                                      likert_split,
@@ -15,7 +11,7 @@ renderTestTable = function( dataset, factors, currentFactors,
         p = chisq.test( filtered$likert_data[, question],
                         filtered$row_factors[ ,likert_split[1] ],
                         simulate.p.value = TRUE )$p.value
-        out$p.value[ out$factor == question ] = p#p.adjust( p, nquestions )
+        out$p.value[ out$factor == question ] = p
       }
 
       row.names( out ) = NULL
@@ -26,7 +22,7 @@ renderTestTable = function( dataset, factors, currentFactors,
                                      split_factors )
       out = data.frame( out, p.value = NA )
       for ( factor in split_factors )
-        if( factor %in% names( dataset$row_factors ) ){
+        if( factor %in% names( filtered$row_factors ) ){
           # calculate p value from chi squared test
           p = chisq.test( filtered$likert_data[,1],
                           filtered$row_factors[,factor],

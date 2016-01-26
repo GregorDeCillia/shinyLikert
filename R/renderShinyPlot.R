@@ -1,15 +1,17 @@
-renderShinyPlot = function( data_set, input, factors,
-                            currentFactors, questions, height, id,
+renderShinyPlot = function( factors,
+                            currentFactors,
+                            height,
+                            id,
                             response_levels,
                             split_factors,
                             likert_split,
                             grouping,
-                            output,
+                            filtered_data,
                             env = parent.frame(),
                             ...
 ){
   reactiveLikertTable = reactive({
-    renderTestTable( data_set, factors, currentFactors,
+    renderTestTable( filtered_data(),
                      likert_split, split_factors )
 
   })
@@ -19,16 +21,13 @@ renderShinyPlot = function( data_set, input, factors,
       return( NULL )
 
     # filter the data according to the dropbox inputs
-    filtered = filterDataSet( data_set,
-                              factors,
-                              currentFactors()
-    )
+    filtered = filtered_data()
 
     # in case of an ordinary plot
     likert_table = create_table( filtered$likert_data,
                                  response_levels )
 
-    output[[ paste0(id, ".factorTable" ) ]] =
+    filtered$output[[ paste0(id, ".factorTable" ) ]] =
       renderTable( likert_table )
 
     # in case of a split-plot
@@ -37,7 +36,7 @@ renderShinyPlot = function( data_set, input, factors,
                                              response_levels )
 
 
-    if( is.null( likert_table2 ) && length( factors ) != 0 ) # triggers when impossible factor
+    if( is.null( likert_table2 ) && length( currentFactors() ) != 0 ) # triggers when impossible factor
       # combinations are chosen
       return( NULL )
 
@@ -82,7 +81,7 @@ renderShinyPlot = function( data_set, input, factors,
   height = function(){
     if( is.null( height ) )
       return( 450 )
-    high = input[[ paste0( id, ".height" ) ]]
+    high = filtered_data()$input[[ paste0( id, ".height" ) ]]
     if( is.null( high ) )
       return( 450 )
     return ( high )

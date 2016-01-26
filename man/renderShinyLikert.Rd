@@ -5,7 +5,6 @@
 \title{Shiny likert}
 \usage{
 renderShinyLikert( data,
-                   input, output,
                    dropdown_factors = NULL,
                    questions = names( data$likert_data ),
                    height = NULL,
@@ -22,9 +21,6 @@ renderShinyLikert( data,
 }
 \arguments{
 \item{data}{An object of type likertData to be plotted}
-
-\item{input, output}{options to be passed down from the following call \cr
-shinyApp( ui=..., server = function( input,output, session )\{ ... \} )}
 
 \item{dropdown_factors}{names ot the factors which should be used as for
 the dropdown menus}

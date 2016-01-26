@@ -150,7 +150,7 @@ shinyApp(
       ),
     server = function(input,output,session){
       rendered = renderShinyLikert( 
-        testData2 , input, output, 
+        testData2 ,
         dropdown = "gender" )
       output$plot = rendered$plot
       output$selector = rendered$selector
