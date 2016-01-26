@@ -22,3 +22,6 @@ Link            | Description
 [here]:           http://personality-testing.info/_rawdata/
 [chisqTest]:      chisqTest/ 
 [factorOverview]: factorOverview/
+
+<p style='text-align:right;'>[$\Uparrow$](./../)</p>
+
