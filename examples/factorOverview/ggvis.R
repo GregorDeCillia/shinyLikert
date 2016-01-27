@@ -1,3 +1,5 @@
+library(shinyLikert)
+
 data = createTestData(100, 10)
 selected_data = subset( data$row_factors, select="country")
 

@@ -1,5 +1,6 @@
 require(shinyLikert)
 require(likert)
+testData2 = createTestData( 100, 10 )
 td = likert::likert( testData2$likert_data )
 class(td)
 likert.bar.plot(td)

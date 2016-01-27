@@ -1,3 +1,5 @@
+library( shinyLikert )
+
 nquestions = 500
 
 data = createTestData(100, nquestions, "", "" )
@@ -11,7 +13,7 @@ for ( i in 1:nquestions )
 # Expect equal distribution
 hist( x )
 
-load("data_nobuild/cartell.rda")
+load("../cattellData/cartell.rda")
 data = cartell_data
 chisq.test( data$likert_data[1:1000,1],
             data$row_factors[1:1000,4],
