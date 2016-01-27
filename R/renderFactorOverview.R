@@ -54,13 +54,11 @@ renderFactorOverview = function(
                  names(data$column_factors ) )[1]
     }
 
-    cat( factor,"\n" )
     if( factor %in% names( data$row_factors ) )
       factor_vec = data.frame( x = data$row_factors[, factor] )
     else
       factor_vec = data.frame( x = data$column_factors[, factor] )
     names( factor_vec ) = "x"
-    cat( names( factor_vec ),"\n" )
     return( factor_vec )
   })
 

@@ -47,7 +47,6 @@ renderShinyPlot = function( factors,
                               ... )
                         )
 
-    #cat( is.null( split_factors ) )
     if( !is.null( likert_split ) ){
       td = likert::likert( filtered$likert_data,
                            grouping = filtered$row_factors[ , likert_split ] )
