@@ -1,0 +1,121 @@
+---
+title: "Using shinyLikert in a UI/Server setup"
+author: "Gregor de Cillia"
+output: html_document
+runtime: shiny
+---
+
+The `shinyLikert` package is meant to be used in interactive sessions. There are basically tow ways to run interactive content: shinyMarkdown files and standalone apps using a ui/server setup. These examples will show you how to use the latter.
+
+## In the R terminal
+
+To use the package in the console, you can use the command `shinyApp` for interactivity. For example, you can copy/paste the following in your console.
+
+```{r, message=FALSE}
+library(shinyLikert)
+```
+
+```{r, ref.label="renderFactorOverview", eval=FALSE}
+```
+
+Now a new window will open showing the following output.
+
+```{r renderFactorOverview, echo=FALSE}
+ shinyApp(
+       ui= fluidPage(
+         uiOutput( "selector" ),
+         uiOutput( "plot" )
+       ),
+       server = function(input,output,session){
+         testData3 = createTestData( participants = 100,
+                                     questions    = 10,
+                                     input,
+                                     output )
+         rendered = renderFactorOverview(
+           testData3
+           )
+         output$plot     = renderUI({rendered$plot})
+         output$selector = renderUI({rendered$selector})
+       }
+     )
+```
+
+Note that the `output` object is used to transfer the plot and selector from the server to the ui.
+
+## With ui.R and server.R as seperate scripts
+
+Alternatively, you can create two files `ui.R` and `server.R` containing the `ui` and `server` arguments wrapped by `shinyUI` and `shinyServer`. Then place them in the same folder. Here is the content of `ui.R`
+
+```{r, eval=FALSE}
+library(shinyLikert)
+shinyUI( 
+  fluidPage(
+    uiOutput( "selector" ),
+    uiOutput( "plot" )
+  )
+)
+```
+
+the `server.R` file should look as follows
+
+```{r, eval=FALSE}
+library(shinyLikert)
+shinyServer(
+  function(input, output) {
+    testData3 = createTestData( participants = 100,
+                                questions    = 10,
+                                input,
+                                output )
+    rendered = renderFactorOverview(
+      testData3
+    )
+    output$plot     = renderUI({rendered$plot})
+    output$selector = renderUI({rendered$selector})
+  }
+)  
+
+```
+
+Now you can run the app using
+
+```{r, eval=FALSE}
+runApp( "path/to/folder/containing/ui.R/and/server.R" )
+```
+
+The path can be either global or local to your working directory (see `?getwd` for help). The defailt argument of `runApp` is our current working directory. This means, you can run the app with
+
+```{r, eval=FALSE}
+runApp()
+```
+
+in case your working directory is the one containing the `ui.R` and `server.R` files.
+
+## Compability with RMarkdown files
+
+copying the above `shinyApp` command into a chunk of a ShinyMarkdown also works. The app then appears inside the document.
+
+##Another example
+
+Here is another example of a ui/server setup.
+
+```{r}
+shinyApp(
+    ui= fluidPage(
+        uiOutput("selector"),
+        uiOutput( "plot" )
+      ),
+    server = function(input,output,session){
+      testData3 = createTestData( participants = 100, 
+                                  questions    = 10, 
+                                  input, 
+                                  output )
+      rendered = renderShinyLikert( 
+        testData3 ,
+        dropdown = "gender" )
+      output$plot = rendered$plot
+      output$selector = rendered$selector
+    },
+    options = list(height = 600)
+  )
+```
+
