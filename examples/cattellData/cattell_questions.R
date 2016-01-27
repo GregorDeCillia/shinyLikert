@@ -1,4 +1,4 @@
-cartell_questions = c(
+cattell_questions = c(
   # A
   "I know how to comfort others",
   "I enjoy bringing people together",

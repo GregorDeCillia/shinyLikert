@@ -11,8 +11,7 @@ runtime: shiny
 
 ```{r, results='hide', message=FALSE}
   library( shinyLikert )
-  #data( cartell )
-  load( "cartell.rda")
+  load( "cattell_data.rda")
 ```
 
 
@@ -62,53 +61,70 @@ runtime: shiny
 ```
 
 ```{r}
- # summary( cartell_data )
- cartell_data$input  = input
- cartell_data$output = output
+ # skip summary since the calculation of the likert response count
+ # takes some time.
+ #summary( cattell_data )
+ 
+ # supply input and output to the dataset to enable interaction of
+ # all functions which take cattell_data as input.
+ cattell_data$input  = input
+ cattell_data$output = output
+ 
+ # display the fator overview
  fluidPage(
-   renderFactorOverview( cartell_data )
+   renderFactorOverview( cattell_data )
  )
  
- cartell_data$column_factors = cbind( cartell_data$column_factors,
-                                      question = names(cartell_data$likert_data)
+ # add question as column_factor. This way, questions can be selected
+ # through a dropdown input
+ cattell_data$column_factors = cbind( 
+   cattell_data$column_factors,
+   question = names(cattell_data$likert_data)
   )
- cartell_data$likert_data  = cartell_data$likert_data[1:2000,]
- cartell_data$row_factors  = cartell_data$row_factors[1:2000,]
+ 
+ # remove some entries to speed up the server tasks. Note, that this
+ # dataset had 49159 participants
+ cattell_data$likert_data  = cattell_data$likert_data[1:2000,]
+ cattell_data$row_factors  = cattell_data$row_factors[1:2000,]
 
-  rendered2 = renderShinyLikert(
-        cartell_data , 
-        dropdown = c("question" ),
-        split = c("source","gender"),
-        response_levels = c( #"missed",
-                             "strongly disagree", 
-                             "disagree", 
-                             "neither agree not disagree", 
-                             "agree", 
-                             "strongly agree" ),
-        as.percent = TRUE,
-        positive.order = TRUE
-  )
-  rendered2$selector
-  rendered2$plot 
+ rendered2 = renderShinyLikert(
+   cattell_data , 
+   dropdown = c( "question" ),
+   split = c( "source", "gender" ),
+   response_levels = c( 
+     #"missed",                      # do not plot the missings
+                                     # this can be avoided by replacing
+                                     # missed with NAs in likert_data
+     "strongly disagree", 
+     "disagree", 
+     "neither agree not disagree", 
+     "agree", 
+     "strongly agree" ),
+   as.percent = TRUE,
+   positive.order = TRUE
+ )
+ rendered2$selector
+ rendered2$plot 
  
 ```
 
 ```{r}
-  # replace missing answers with NAs
-  i = 1
-  for( question in cartell_data$likert_data ){
-    question[question == "missed"] = NA
-    cartell_data$likert_data[,i] = factor( question )
-    i = i + 1
-  }
+ # replace missing answers with NAs
+ i = 1
+ for( question in cattell_data$likert_data ){
+   question[question == "missed"] = NA
+   cattell_data$likert_data[,i] = factor( question )
+   i = i + 1
+ }
 
-  fluidPage(
-  renderShinyLikert(
-        cartell_data,
-        dropdown = c("question_type" ),
-        group = "gender",
-        as.percent = TRUE,
-        height = c(750,1500)
-  )
-  )
+ # Call renderShinyLikert and output with fluidPage
+ fluidPage(
+   renderShinyLikert(
+     cattell_data,
+     dropdown = c("question_type" ),
+     group = "gender",
+     as.percent = TRUE,
+     height = c(750,1500)
+   )
+ )
 ```

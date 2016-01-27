@@ -13,8 +13,8 @@ for ( i in 1:nquestions )
 # Expect equal distribution
 hist( x )
 
-load("../cattellData/cartell.rda")
-data = cartell_data
+load("../cattellData/cattell_data.rda")
+data = cattell_data
 chisq.test( data$likert_data[1:1000,1],
             data$row_factors[1:1000,4],
             simulate.p.value = TRUE )$p.value
