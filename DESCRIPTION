@@ -1,10 +1,11 @@
 Package: shinyLikert
 Version: 0.5-1
 Date: 2015-01-01
-Title: The shinyLikert package
-Authors@R: c(person("Gregor", "de Cillia", role = c("aut", "cre"),
-		     email = "Joe.Developer@some.domain.net"),
-	      person("Matthias", "Templ", role = "aut") )
+Title: Shiny wrapper for plots of likert items
+Authors@R: c( person( "Gregor", "de Cillia",
+                      role = c("aut", "cre"),
+                      email = "de.cillia.gregor@gmail.com"),
+              person( "Matthias", "Templ", role = "aut" ) )
 Author: Gregor de Cillia [aut,cre], Matthias templ [aut]
 Maintainer: Gregor de Cillia <de.cillia.gregor@gmail.com>
 Imports: shiny
@@ -15,8 +16,8 @@ Depends:
     likert
 Suggests:
     MASS
-Description: Interactive wrapper for the HH package.
-License: GPL (>= 2)
-URL: https://www.r-project.org, http://www.another.url
-BugReports: https://pkgname.bugtracker.url
+Description: Create interactive functions to display and analize likert data.
+License:     GPL (>= 2)
+URL:         http://www.gregor-de-cillia.xyz/shiny/shinyLikert/
+BugReports:  https://github.com/GregorDeCillia/shinyLikert/issues
 RoxygenNote: 5.0.1
