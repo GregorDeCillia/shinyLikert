@@ -28,4 +28,26 @@ renderFactorOverview(data, id = toString(paste0("id", sample(1:10000, 1))),
 \description{
 Create widgets to visualize the factor variables
 }
+\examples{
+\dontrun{
+shinyApp(
+    ui= fluidPage(
+        uiOutput( "selector" ),
+        uiOutput( "plot" )
+    ),
+    server = function(input,output,session){
+        testData3 = createTestData( participants = 100,
+                                    questions    = 10,
+                                    input,
+                                    output )
+        rendered = renderFactorOverview(
+            testData3
+        )
+        output$plot     = renderUI({rendered$plot})
+        output$selector = renderUI({rendered$selector})
+   }
+)
+}
+
+}
 

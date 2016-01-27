@@ -8,6 +8,28 @@
 #' @param quoted argument for shiny session
 #' @param expr   argument for shiny session
 #' @param ...    argument for shiny session
+#'
+#' @examples
+#' \dontrun{
+#' shinyApp(
+#'     ui= fluidPage(
+#'         uiOutput( "selector" ),
+#'         uiOutput( "plot" )
+#'     ),
+#'     server = function(input,output,session){
+#'         testData3 = createTestData( participants = 100,
+#'                                     questions    = 10,
+#'                                     input,
+#'                                     output )
+#'         rendered = renderFactorOverview(
+#'             testData3
+#'         )
+#'         output$plot     = renderUI({rendered$plot})
+#'         output$selector = renderUI({rendered$selector})
+#'    }
+#' )
+#' }
+#'
 #' @export
 #'
 renderFactorOverview = function(

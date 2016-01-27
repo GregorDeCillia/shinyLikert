@@ -10,7 +10,7 @@
 #'                    height = NULL,
 #'                    env = parent.frame(),
 #'                    quoted = FALSE,
-#'                    expr= "NULL",
+#'                    expr = "NULL",
 #'                    response_levels = levels( data$likert_data[,1] ),
 #'                    split_factors = NULL,
 #'                    group,
@@ -39,21 +39,22 @@
 #'
 #' @return  A list of rendered shiny objects which can be used as outputs.
 #' @examples
-#' x <- 1
-#' # shinyApp(
-#' #     ui= fluidPage(
-#' #         uiOutput( "selector" ),
-#' #         plotOutput( "plot" )
-#' #     ),
-#' #     server = function( input, output, session ){
-#' #         rendered = renderShinyLikert(
-#' #             "ID 1", testData2 ,
-#' #             input, output,
-#' #             dropdown = "gender" )
-#' #         output$plot     = rendered$plot
-#' #         output$selector = rendered$selector
-#' #     }
-#' # )
+#' \dontrun{
+#'   shinyApp(
+#'       ui= fluidPage(
+#'           uiOutput( "selector" ),
+#'           uiOutput( "plot" )
+#'       ),
+#'       server = function( input, output, session ){
+#'           testData2 = createTestData( 100, 10, input, output )
+#'           rendered = renderShinyLikert(
+#'               testData2 ,
+#'               dropdown = "gender" )
+#'           output$plot     = rendered$plot
+#'           output$selector = rendered$selector
+#'       }
+#'   )
+#' }
 #' @export
 #' @author Gregor de Cillia
 renderShinyLikert = function( data,

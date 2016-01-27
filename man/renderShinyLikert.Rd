@@ -58,21 +58,22 @@ Creates a list of rendered shiny outputs to be used inside a call to
 shinyApp() or inside an ShinyMarkdown document
 }
 \examples{
-x <- 1
-# shinyApp(
-#     ui= fluidPage(
-#         uiOutput( "selector" ),
-#         plotOutput( "plot" )
-#     ),
-#     server = function( input, output, session ){
-#         rendered = renderShinyLikert(
-#             "ID 1", testData2 ,
-#             input, output,
-#             dropdown = "gender" )
-#         output$plot     = rendered$plot
-#         output$selector = rendered$selector
-#     }
-# )
+\dontrun{
+  shinyApp(
+      ui= fluidPage(
+          uiOutput( "selector" ),
+          uiOutput( "plot" )
+      ),
+      server = function( input, output, session ){
+          testData2 = createTestData( 100, 10, input, output )
+          rendered = renderShinyLikert(
+              testData2 ,
+              dropdown = "gender" )
+          output$plot     = rendered$plot
+          output$selector = rendered$selector
+      }
+  )
+}
 }
 \author{
 Gregor de Cillia
