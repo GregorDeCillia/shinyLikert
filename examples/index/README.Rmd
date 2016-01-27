@@ -16,15 +16,18 @@ devtools::install_github("gregorDeCillia/shinyLikert")
 Link            | Description
 ----------------|------------------------------
 [misc]          | Simple examples on how to use shinyLikert
-[cattellData](cattellData/)   | Quick overview of [Cattell's 16 Personality Factors Test]. The raw data can be found [here].
+[cattellData]   | Quick overview of [Cattell's 16 Personality Factors Test]. The raw data can be found [here].
 [chisqTest]     | some applications of the Chi-Square Test of Homogeneity
 [factorOverview]| Demonstration of the `renderFactorOverview` function
+[ui-server]     | Shows how to use this package in a ui/server setup
 
 
 [misc]:           misc/
+[cattellData]:    cattellData/
 [Cattell's 16 Personality Factors Test]: http://personality-testing.info/tests/16PF.php
 [here]:           http://personality-testing.info/_rawdata/
 [chisqTest]:      chisqTest/ 
 [factorOverview]: factorOverview/
+[ui-server]:      ui-server/
 
 <p style='text-align:right;'>[$\Uparrow$](./../)</p>
