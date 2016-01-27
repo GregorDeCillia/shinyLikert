@@ -63,7 +63,7 @@ renderShinyLikert = function( data,
                               height = NULL,
                               env = parent.frame(),
                               quoted = FALSE,
-                              expr= "NULL",
+                              expr = "NULL",
                               response_levels = levels( data$likert_data[,1] ),
                               split_factors = NULL,
                               group = NULL,
@@ -112,6 +112,19 @@ renderShinyLikert = function( data,
                               #input, output
     )
     out$heightSlider = renderHeightSlider( id, height )
+    if( ! is.null( split_factors )  )
+      out$mulipanel = selectInput(
+        inputId = paste0(id,".split_factors"),
+        label   = "split factors",
+        choices = setdiff(
+          union(
+            names( data$row_factors),
+            names( data$column_factors )
+          ),
+          dropdown_factors
+        ),
+        selected = split_factors,
+        multiple = TRUE )
     return( out )
   })
 

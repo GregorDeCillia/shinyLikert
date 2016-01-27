@@ -30,16 +30,6 @@ renderShinyPlot = function( factors,
     filtered$output[[ paste0(id, ".factorTable" ) ]] =
       renderTable( likert_table )
 
-    # in case of a split-plot
-    likert_table2 = create_factorized_table( filtered,
-                                             split_factors,
-                                             response_levels )
-
-
-    if( is.null( likert_table2 ) && length( currentFactors() ) != 0 ) # triggers when impossible factor
-      # combinations are chosen
-      return( NULL )
-
     # set default arguments
     defaults <- list( main = currentFactors() )
     args <- modifyList( defaults,
@@ -61,7 +51,20 @@ renderShinyPlot = function( factors,
     }
 
     if( !is.null( split_factors ) ){
-      print( likert_table2 )
+      split_factors = filtered$input[[paste0(id,".split_factors")]]
+      cat( split_factors )
+      # in case of a split-plot
+      likert_table2 = create_factorized_table( filtered,
+                                               split_factors,
+                                               response_levels
+                                               )
+
+
+      if( is.null( likert_table2 ) && length( currentFactors() ) != 0 ) # triggers when impossible factor
+        # combinations are chosen
+        return( NULL )
+      likert_table2$factor = as.character( likert_table2$factor )
+      cat("\n NAMES: ", likert_table2$factor,"\n")
       HH::likert( level ~ . | factor, likert_table2,
               scales = list( cex = 1,
                              y = list( relation = "free" )
@@ -72,6 +75,7 @@ renderShinyPlot = function( factors,
               layout = c( 1, length( split_factors ) + 1  ),
               strip = FALSE,
               ylab = NULL,
+              positive.order=TRUE,
               ...
       )
     }

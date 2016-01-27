@@ -252,8 +252,7 @@ For factror analysis, you can also use the `split_factors` argument.
     fluidPage( 
       renderShinyLikert( 
         testData2,
-        split    = c( "difficulty", "gender", "country" ),
-        positive.order = TRUE   # ???
+        split    = c( "difficulty", "gender", "country" )
       ) 
     )
 ```
