@@ -46,6 +46,8 @@ renderShinyPlot = function( factors,
     }
 
     if( is.null( split_factors ) ){
+      if( is.null(likert_table)  )
+        return( NULL )
       print( likert_table )
       return( do.call( getFromNamespace("likert","HH"), args ) )
     }
