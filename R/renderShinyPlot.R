@@ -48,13 +48,11 @@ renderShinyPlot = function( factors,
     if( is.null( split_factors ) ){
       if( is.null(likert_table)  )
         return( NULL )
-      print( likert_table )
       return( do.call( getFromNamespace("likert","HH"), args ) )
     }
 
     if( !is.null( split_factors ) ){
       split_factors = filtered$input[[paste0(id,".split_factors")]]
-      cat( split_factors )
       # in case of a split-plot
       likert_table2 = create_factorized_table( filtered,
                                                split_factors,
@@ -66,7 +64,6 @@ renderShinyPlot = function( factors,
         # combinations are chosen
         return( NULL )
       likert_table2$factor = as.character( likert_table2$factor )
-      cat("\n NAMES: ", likert_table2$factor,"\n")
       HH::likert( level ~ . | factor, likert_table2,
               scales = list( cex = 1,
                              y = list( relation = "free" )
