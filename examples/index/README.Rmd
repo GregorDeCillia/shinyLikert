@@ -20,6 +20,7 @@ Link            | Description
 [chisqTest]     | some applications of the Chi-Square Test of Homogeneity
 [factorOverview]| Demonstration of the `renderFactorOverview` function
 [ui-server]     | Shows how to use this package in a ui/server setup
+[hfactors]      | Gives an overview how several dropdown factors interact
 
 
 [misc]:           misc/
@@ -29,5 +30,6 @@ Link            | Description
 [chisqTest]:      chisqTest/ 
 [factorOverview]: factorOverview/
 [ui-server]:      ui-server/
+[hfactors]:       hierachicalFactors/
 
 <p style='text-align:right;'>[$\Uparrow$](./../)</p>

@@ -1,0 +1,94 @@
+---
+title: "Hierachical dropdowns"
+author: "Gregor de Cillia"
+output: html_document
+runtime: shiny
+---
+
+Those examples will illustrate the use of hierachical dropdown menus. The import statements are as usual.
+
+```{r, message = FALSE, results='hide'}
+  library(shinyLikert)      # load the package from installed library
+  testData2 = createTestData( participants = 100, 
+                              questions    = 20, 
+                              input, 
+                              output )
+```
+
+Now we will add the factor `question` to the `column_factors`
+
+```{r}
+  
+  testData2$column_factors = cbind( 
+    testData2$column_factors, 
+    question = 
+      factor( rownames( testData2$column_factors ),
+              rownames( testData2$column_factors )
+      )
+  )
+```
+
+To print a plot which filters by `difficulty`, `question` and `skill` use this.
+
+```{r}
+fluidPage(
+  renderShinyLikert( 
+    testData2,
+    dropdown = c( "difficulty",
+                  "question",
+                  "skill" )
+  )
+)
+```
+
+Note that the `question` field gets updated as you change the value of `difficulty`. If `easy` is selected, the question selector will let you choose only those questions, that have been rated as `hard` in the questionnarie. `skill` will only let you choose one level since it depends on `question`: every `question` has one `skill` level specified in `column_factors`. If we change the order of the `dropdown_factors` to 
+
+```{r}
+dropdown_factors = c( "difficulty", "skill", "question" )
+```
+
+the result will look somehow different.
+
+```{r}
+fluidPage(
+  renderShinyLikert( 
+    testData2,
+    dropdown = dropdown_factors )
+)
+```
+
+Now if `difficulty` is set to `hard`  and `skill` is set to `logic`, the `question` field lets you choose among all `hard` questions which are related to `logic`. So far we only used `column_factors` i.e. factors related to the `questions`. `row_factors`, i.e. factors related to the participants can be used in the same way. The options for this dataset are 
+
+```{r}
+names( testData2$row_factors )
+```
+
+The next widget will show the use of `column_factors` and `row factors` mixed.
+To make the plot more appealing, the `split_factors` input has been used too.
+
+```{r}
+fluidPage(
+  renderShinyLikert( 
+    testData2,
+    dropdown = c( "difficulty",      # this is a column_factor
+                  "question",        # this is a column_factor
+                  "country" ),       # this is a row_factor
+    split = "gender" )
+)
+```
+
+Note that if you select `skill` under `split_factors`, only one more bar will appear (or disappear if you unselect it). The other two possible levels are skipped because they contain no observations (given the `quesion`). I also want to mention, that in the above example, the choices of `country` are independent of the selections of `difficulty` and `question` since `country` is the only `row_factor` among those three factors.
+
+Plottingseveral items works as well. You will have to exclude `questions` from the `dropdown` input. Note that `split` does not work well with several questions. Therefore, we will replace it with `group`
+
+```{r}
+fluidPage(
+  renderShinyLikert( 
+    testData2,
+    dropdown = c( "difficulty",      # this is a column_factor
+                  "skill",
+                  #"question",        # this is a column_factor
+                  "country" ),       # this is a row_factor
+    group = "gender" )
+)
+```
