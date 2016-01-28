@@ -1,2 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+examples
+index
+index.html
+READEME.md
+README_files
