@@ -71,28 +71,32 @@ renderShinyLikert = function( data,
                               id = toString(paste0("id",
                                                    sample(1:10000, 1))),
                               ... ){
+  # break scoping here. always be careful with those calls
   input  = get( 'input',   envir=env )
   output = get( 'output',  envir=env )
+
+  # append input and output to dataset
   data$input  = input
   data$output = output
 
+  # getter function for inputs related to this instance of renderShinyLikert
   getInput = function( str, default = NULL ){
     input_object = input[[ paste0( id, str ) ]]
     if( is.null( input_object ) )   # shiny inputs get initialized as NULL
       input_object = default        # since they are implemented like a list
-    input[[ paste0( id, str ) ]]
+    return( input_object )
   }
 
-  valid_factors = c( names(data$row_factors), names(data$"column_factors") )
-
+  # sanity checks for inputs
+  valid_factors = union(
+    names(data$row_factors),
+    names(data$column_factors)
+    )
   for ( factor in c( dropdown_factors, split_factors ) )
     if( !( factor %in% valid_factors ) )
       stop( paste( "factor", factor, "invalid" ) )
 
-  dataset        = data$likert_data#[ , questions ]
-  row_factors    = data$row_factors
-  column_factors = data$column_factors#[questions,]
-
+  # getter function for dropdown selections
   currentFactors = function(){
     out = NULL
     for ( factor in dropdown_factors ){
@@ -105,32 +109,15 @@ renderShinyLikert = function( data,
     return( out )
   }
 
-  selector = reactive({
-    x = currentFactors()   # force reactivity
-    out = create_dropdown_selector( id, dropdown_factors,
-                              row_factors, column_factors,
-                              currentFactors()
-    )
-    out$heightSlider = renderHeightSlider( id, height )
-    if( ! is.null( split_factors )  ){
-      selection = getInput( ".split_factors" )
-      if( is.null(selection ) )
-        selection = split_factors
-      out$mulipanel = selectInput(
-        inputId = paste0( id, ".split_factors" ),
-        label   = "split factors",
-        choices = setdiff(
-          union(
-            names( data$row_factors),
-            names( data$column_factors )
-          ),
-          dropdown_factors
-        ),
-        selected = selection,
-        multiple = TRUE )
-    }
-    return( out )
-  })
+  # get all input UIs as list
+  selector = createInputs( id,
+                           dropdown_factors,
+                           split_factors,
+                           data$row_factors,
+                           data$column_factors,
+                           currentFactors,
+                           getInput,
+                           height            )
 
   # create filtered version of dataset
   filtered_data = reactive({
@@ -140,7 +127,7 @@ renderShinyLikert = function( data,
     )
   })
 
-  # create ouputs
+  # create plot and table ouputs
   outs = renderShinyPlot( dropdown_factors,
                           currentFactors,
                           height,
@@ -151,8 +138,7 @@ renderShinyLikert = function( data,
                           grouping,
                           filtered_data,
                           ... )
-
-  plot = outs$plot
+  plot  = outs$plot
   table = outs$table
 
   output[[paste0(id,".plot")]] = plot
@@ -164,6 +150,7 @@ renderShinyLikert = function( data,
     do.call( "inputPanel", selectorList )
   })
 
+  # return
   list(
         selector = selectorUI,
         plot = renderUI({ tabsetPanel(
