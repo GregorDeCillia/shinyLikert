@@ -106,6 +106,7 @@ renderShinyLikert = function( data,
   }
 
   selector = reactive({
+    x = currentFactors()   # force reactivity
     out = create_dropdown_selector( id, dropdown_factors,
                               row_factors, column_factors,
                               currentFactors()
