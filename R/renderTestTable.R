@@ -1,5 +1,6 @@
 renderTestTable = function( filtered,
-                            likert_split, split_factors )
+                            likert_split, split_factors,
+                            id )
 {
   #renderTable({
     if( !is.null( likert_split ) ){
@@ -18,6 +19,7 @@ renderTestTable = function( filtered,
       return( out )
     }
     if( !is.null( split_factors ) ){
+      split_factors = filtered$input[[paste0(id,".split_factors")]]
       out = create_factorized_table( filtered,
                                      split_factors )
       out = data.frame( out, p.value = NA )

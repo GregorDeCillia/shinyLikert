@@ -12,7 +12,8 @@ renderShinyPlot = function( factors,
 ){
   reactiveLikertTable = reactive({
     renderTestTable( filtered_data(),
-                     likert_split, split_factors )
+                     likert_split, split_factors,
+                     id )
 
   })
 
