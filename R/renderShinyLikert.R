@@ -112,9 +112,12 @@ renderShinyLikert = function( data,
                               currentFactors()
     )
     out$heightSlider = renderHeightSlider( id, height )
-    if( ! is.null( split_factors )  )
+    if( ! is.null( split_factors )  ){
+      selection = input[[ paste0( id,".split_factors" )]]
+      if( is.null(selection ) )
+        selection = split_factors
       out$mulipanel = selectInput(
-        inputId = paste0(id,".split_factors"),
+        inputId = paste0( id,".split_factors" ),
         label   = "split factors",
         choices = setdiff(
           union(
@@ -123,8 +126,9 @@ renderShinyLikert = function( data,
           ),
           dropdown_factors
         ),
-        selected = split_factors,
+        selected = selection,
         multiple = TRUE )
+    }
     return( out )
   })
 
