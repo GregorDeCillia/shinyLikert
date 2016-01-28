@@ -2,8 +2,6 @@
 #'
 #' @param data   the datasetto be shown
 #' @param id     a unique id of the output
-#' @param input  argument for shiny session
-#' @param output argument for shiny session
 #' @param env    argument for shiny session
 #' @param quoted argument for shiny session
 #' @param expr   argument for shiny session
@@ -36,13 +34,13 @@ renderFactorOverview = function(
   data,
   id= toString(paste0("id",
                       sample(1:10000, 1))),
-  input = data$input,
-  output = data$output,
   env = parent.frame(),
   quoted = FALSE,
   expr= "NULL",
   ... )
 {
+  input  = get( 'input',   envir=env )
+  output = get( 'output',  envir=env )
   factor = reactive({
     input[[paste0(id,"factor")]]
   })

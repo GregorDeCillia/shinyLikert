@@ -10,9 +10,7 @@ Those examples will illustrate the use of hierachical dropdown menus. The import
 ```{r, message = FALSE, results='hide'}
   library(shinyLikert)      # load the package from installed library
   testData2 = createTestData( participants = 100, 
-                              questions    = 20, 
-                              input, 
-                              output )
+                              questions    = 20 )
 ```
 
 Now we will add the factor `question` to the `column_factors`
@@ -79,7 +77,7 @@ fluidPage(
 
 Note that if you select `skill` under `split_factors`, only one more bar will appear (or disappear if you unselect it). The other two possible levels are skipped because they contain no observations (given the `quesion`). I also want to mention, that in the above example, the choices of `country` are independent of the selections of `difficulty` and `question` since `country` is the only `row_factor` among those three factors.
 
-Plottingseveral items works as well. You will have to exclude `questions` from the `dropdown` input. Note that `split` does not work well with several questions. Therefore, we will replace it with `group`
+Plotting several items works as well. You will have to exclude `questions` from the `dropdown` input. Note that `split` does not work well with several questions. Therefore, we will replace it with `group`
 
 ```{r}
 fluidPage(

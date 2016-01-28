@@ -9,10 +9,8 @@ runtime: shiny
 
   library( shinyLikert )
   testData2 = createTestData( participants = 100, 
-                              questions    = 10, 
-                              input, 
-                              output )
-  rendered = renderFactorOverview(testData2)
+                              questions    = 10 )
+  rendered = renderFactorOverview( testData2 )
   rendered$selector
   rendered$plot
 

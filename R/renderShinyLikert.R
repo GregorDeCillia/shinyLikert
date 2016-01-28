@@ -71,8 +71,11 @@ renderShinyLikert = function( data,
                               id = toString(paste0("id",
                                                    sample(1:10000, 1))),
                               ... ){
-  input = data$input
-  output = data$output
+  input  = get( 'input',   envir=env )
+  output = get( 'output',  envir=env )
+  data$input  = input
+  data$output = output
+
   if( is.null( input ) || is.null( output ) ){
     message("non interactive session\n")
     data = likert::likert( data$likert_data )$results
@@ -81,6 +84,13 @@ renderShinyLikert = function( data,
                   main = deparse( substitute( data ) ) )
       })
                   ) )
+  }
+
+  getInput = function( str, default = NULL ){
+    input_object = input[[ paste0( id, str ) ]]
+    if( is.null( input_object ) )   # shiny inputs get initialized as NULL
+      input_object = default        # since they are implemented like a list
+    input[[ paste0( id, str ) ]]
   }
 
   valid_factors = c( names(data$row_factors), names(data$"column_factors") )
@@ -96,9 +106,9 @@ renderShinyLikert = function( data,
   currentFactors = function(){
     out = NULL
     for ( factor in dropdown_factors ){
-      if( is.null( input[[ paste0( id, factor ) ]] ) )
+      if( is.null( getInput( factor ) ) )
         return( NULL )
-      out = c( out, input[[ paste0( id, factor ) ]] )
+      out = c( out, getInput( factor ) )
     }
     if ( is.null(out) )  ## bypass error messages by replacing NA with FALSE
       return ( NULL )
@@ -113,11 +123,11 @@ renderShinyLikert = function( data,
     )
     out$heightSlider = renderHeightSlider( id, height )
     if( ! is.null( split_factors )  ){
-      selection = input[[ paste0( id,".split_factors" )]]
+      selection = getInput( ".split_factors" )
       if( is.null(selection ) )
         selection = split_factors
       out$mulipanel = selectInput(
-        inputId = paste0( id,".split_factors" ),
+        inputId = paste0( id, ".split_factors" ),
         label   = "split factors",
         choices = setdiff(
           union(

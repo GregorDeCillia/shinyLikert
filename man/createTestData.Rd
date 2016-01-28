@@ -5,7 +5,6 @@
 \title{createTestData}
 \usage{
 createTestData( participants, questions,
-                       input, output,
                        participant_factors, question_factors,
                        response_levels )
 }
@@ -13,10 +12,6 @@ createTestData( participants, questions,
 \item{participants}{either the number of participants or a vector of participant names}
 
 \item{questions}{either the number of questions or a vector of question names}
-
-\item{input}{arguments for the shiny session}
-
-\item{output}{arguments for the shiny session}
 
 \item{participant_factors}{a list containing all participant factors}
 

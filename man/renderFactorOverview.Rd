@@ -5,17 +5,12 @@
 \title{Create widgets to visualize the factor variables}
 \usage{
 renderFactorOverview(data, id = toString(paste0("id", sample(1:10000, 1))),
-  input = data$input, output = data$output, env = parent.frame(),
-  quoted = FALSE, expr = "NULL", ...)
+  env = parent.frame(), quoted = FALSE, expr = "NULL", ...)
 }
 \arguments{
 \item{data}{the datasetto be shown}
 
 \item{id}{a unique id of the output}
-
-\item{input}{argument for shiny session}
-
-\item{output}{argument for shiny session}
 
 \item{env}{argument for shiny session}
 

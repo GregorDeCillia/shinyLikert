@@ -6,14 +6,11 @@
 #' distributions.
 #'
 #' @usage createTestData( participants, questions,
-#'                        input, output,
 #'                        participant_factors, question_factors,
 #'                        response_levels )
 #'
 #' @param participants  either the number of participants or a vector of participant names
 #' @param questions     either the number of questions or a vector of question names
-#' @param input         arguments for the shiny session
-#' @param output        arguments for the shiny session
 #' @param participant_factors a list containing all participant factors
 #' @param question_factors    a list containing all question factors
 #' @param response_levels     Vector with response levels
@@ -32,8 +29,6 @@
 #' @export
 createTestData = function( participants,
                            questions,
-                           input = NULL,
-                           output = NULL,
                            participant_factors = list( country = c("US","AT","CH"),
                                                        gender = c("Male", "Female" ),
                                                        position = c("Programmer",
@@ -84,9 +79,7 @@ createTestData = function( participants,
 
   out = list(likert_data = likert_data,
              row_factors = row_factors,
-             column_factors = column_factors,
-             input = input,
-             output  = output )
+             column_factors = column_factors )
   class( out ) = "likertData"
 
   return( out )

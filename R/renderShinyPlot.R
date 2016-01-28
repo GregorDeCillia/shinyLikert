@@ -10,6 +10,7 @@ renderShinyPlot = function( factors,
                             env = parent.frame(),
                             ...
 ){
+  getInput  = get( 'getInput',   envir=env )
   reactiveLikertTable = reactive({
     renderTestTable( filtered_data(),
                      likert_split, split_factors,
@@ -53,7 +54,7 @@ renderShinyPlot = function( factors,
     }
 
     if( !is.null( split_factors ) ){
-      split_factors = filtered$input[[paste0(id,".split_factors")]]
+      split_factors = getInput( ".split_factors" )
       # in case of a split-plot
       likert_table2 = create_factorized_table( filtered,
                                                split_factors,
@@ -84,9 +85,7 @@ renderShinyPlot = function( factors,
   height = function(){
     if( is.null( height ) )
       return( 450 )
-    high = filtered_data()$input[[ paste0( id, ".height" ) ]]
-    if( is.null( high ) )
-      return( 450 )
+    high = getInput( ".height", 450 )
     return ( high )
   }
   )

@@ -19,9 +19,7 @@ To create a shiny widget the data is assumed to be of class `likertData`, which 
   #require( 'devtools' )
   #devtools::load_all( "../.." ) # load the package from source
   testData2 = createTestData( participants = 100, 
-                              questions    = 10, 
-                              input, 
-                              output )
+                              questions    = 10 )
 
 ```
 
@@ -147,11 +145,9 @@ shinyApp(
         uiOutput("selector"),
         uiOutput( "plot" )
       ),
-    server = function(input,output,session){
+    server = function( input, output, session ){
       testData3 = createTestData( participants = 100, 
-                                  questions    = 10, 
-                                  input, 
-                                  output )
+                                  questions    = 10  )
       rendered = renderShinyLikert( 
         testData3 ,
         dropdown = "gender" )
