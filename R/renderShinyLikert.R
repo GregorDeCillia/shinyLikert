@@ -105,11 +105,10 @@ renderShinyLikert = function( data,
     return( out )
   }
 
-  selector2 = reactive({
+  selector = reactive({
     out = create_dropdown_selector( id, dropdown_factors,
                               row_factors, column_factors,
-                              currentFactors()#,
-                              #input, output
+                              currentFactors()
     )
     out$heightSlider = renderHeightSlider( id, height )
     if( ! is.null( split_factors )  )
@@ -154,14 +153,14 @@ renderShinyLikert = function( data,
   output[[paste0(id,".plot")]] = plot
 
   # use an inputPanel container for the inputs
-  selector9 = renderUI({
-    selector4 = selector2()
-    names( selector4 ) = NULL
-    do.call( "inputPanel", selector4 )
+  selectorUI = renderUI({
+    selectorList = selector()
+    names( selectorList ) = NULL
+    do.call( "inputPanel", selectorList )
   })
 
   list(
-        selector = selector9,
+        selector = selectorUI,
         plot = renderUI({ tabsetPanel(
           tabPanel( "plot",
                     plot
