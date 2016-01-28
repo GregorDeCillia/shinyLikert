@@ -9,15 +9,10 @@ create_factorized_table = function( data_set,
   out = create_table( data_set$likert_data, response_levels )
   if( is.null(out) || dim( out )[1]==0 || dim(out)[2] == 0 )
     return( NULL )
-  #if( accumulate ){
-    out = colSums( out )
-    out = data.frame( cbind( t( out ) ), "all", "", stringsAsFactors = FALSE )
-  #}
-  #if ( accumulate )
-    names(out) = c( response_levels, "factor", "level" )
-  #if  (!accumulate)
-  #  names(out) = c( response_levels, "question", split_factors[1] )
 
+  out = colSums( out )
+  out = data.frame( cbind( t( out ) ), "all", "", stringsAsFactors = FALSE )
+  names(out) = c( response_levels, "factor", "level" )
 
   for ( factor in split_factors ){
     if ( factor %in% names( data_set$row_factors ) )
@@ -30,20 +25,22 @@ create_factorized_table = function( data_set,
                                             level
                                             )$likert_data,
                              response_levels )
-      if( accumulate ){
-      newout = colSums( newout )
-      newout = data.frame( cbind( t(newout) ,
-                                  factor,
-                                  level ),
-                           stringsAsFactors = FALSE )
+      if ( !is.null(newout) ){
+        if( accumulate ){
+          newout = colSums( newout )
+          newout = data.frame( cbind( t(newout) ,
+                                      factor,
+                                      level ),
+                               stringsAsFactors = FALSE )
+        }
+        if( !accumulate )
+          newout = data.frame( cbind( newout ,
+                                      rownames(newout),
+                                      level ),
+                               stringsAsFactors = FALSE )
+        names(newout) = c( response_levels, "factor", "level" )
+        out = rbind( out, newout )
       }
-      if( !accumulate )
-        newout = data.frame( cbind( newout ,
-                                    rownames(newout),
-                                    level ),
-                             stringsAsFactors = FALSE )
-      names(newout) = c( response_levels, "factor", "level" )
-      out = rbind( out, newout )
     }
 
   }
