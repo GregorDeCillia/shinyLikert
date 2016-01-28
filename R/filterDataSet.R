@@ -8,6 +8,9 @@ filterDataSet = function( data_set,
   if ( length( active_factors ) == 0 )
     return( data_set )
   for ( i in 1:length( active_factors ) ){
+    dimens = dim( data_set$likert_data )
+    if ( dimens[1] == 0 || dimens[2] == 0 )
+      return( data_set )
     if( active_factors[i] %in% names( data_set$row_factors ) )
     {
       subset = data_set$row_factors[[active_factors[i] ]] == active_levels[i]
