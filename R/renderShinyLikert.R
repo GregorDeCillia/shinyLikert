@@ -76,16 +76,6 @@ renderShinyLikert = function( data,
   data$input  = input
   data$output = output
 
-  if( is.null( input ) || is.null( output ) ){
-    message("non interactive session\n")
-    data = likert::likert( data$likert_data )$results
-    return( list( plot = renderPlot({
-      HH::likert( x = data,
-                  main = deparse( substitute( data ) ) )
-      })
-                  ) )
-  }
-
   getInput = function( str, default = NULL ){
     input_object = input[[ paste0( id, str ) ]]
     if( is.null( input_object ) )   # shiny inputs get initialized as NULL
