@@ -8,12 +8,13 @@ Authors@R: c( person( "Gregor", "de Cillia",
               person( "Matthias", "Templ", role = "aut" ) )
 Author: Gregor de Cillia [aut,cre], Matthias templ [aut]
 Maintainer: Gregor de Cillia <de.cillia.gregor@gmail.com>
-Imports: shiny
-Depends:
+Imports: shiny,
     ggvis,
-    R (>= 2.10.0),
     HH,
-    likert
+    likert,
+    lattice
+Depends:
+    R (>= 2.10.0)
 Suggests:
     MASS
 Description: Create interactive functions to display and analize likert data.

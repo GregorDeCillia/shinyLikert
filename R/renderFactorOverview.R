@@ -29,6 +29,9 @@
 #' }
 #'
 #' @export
+#' @importFrom shiny selectInput reactive sliderInput renderUI tabPanel
+#' tabsetPanel renderPlot renderTable
+#' @import ggvis
 #'
 renderFactorOverview = function(
   data,
@@ -70,20 +73,20 @@ renderFactorOverview = function(
   #plot = reactive({
   factor_vec %>%
     ggvis( x = ~x ,
-             width = "1800px" ) %>%
-      layer_bars( fill = "sky blue",
-                  fillOpacity := 0.7,
-                  fillOpacity.hover := 0.9 ) %>%
-      add_axis( "y", title = "count" ) %>%
-      add_axis( "x", title = "" ) %>%
-      add_tooltip( function( df ) {
-        if ( df$stack_upr_ > 1 )
-          paste0( df$stack_upr_, " ", quantity(), "s" )
-        else
-          paste0( df$stack_upr_, " ", quantity() )
-      },
+           width = "1800px" ) %>%
+    layer_bars( fill               = "sky blue",
+                fillOpacity       := 0.7,
+                fillOpacity.hover := 0.9 ) %>%
+    add_axis( "y", title = "count" ) %>%
+    add_axis( "x", title = "" ) %>%
+    add_tooltip( function( df ) {
+      if ( df$stack_upr_ > 1 )
+        paste0( df$stack_upr_, " ", quantity(), "s" )
+      else
+        paste0( df$stack_upr_, " ", quantity() )
+    },
 
-      "hover" ) %>%
+    "hover" ) %>%
     add_tooltip( function( df ) {
       paste0( 100*df$stack_upr_/length(factor_vec()$x), " %" )
     },

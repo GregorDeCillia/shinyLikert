@@ -44,7 +44,7 @@ renderShinyPlot = function( factors,
                            grouping = filtered$row_factors[ , likert_split ] )
       if( grouping == "HH" )
         return( HH::likert( td ) )
-      return( likert.bar.plot( td ) )
+      return( likert::likert.bar.plot( td ) )
     }
 
     if( is.null( split_factors ) ){
@@ -71,7 +71,7 @@ renderShinyPlot = function( factors,
                              y = list( relation = "free" )
               ),
               main = currentFactors(),
-              strip.left = strip.custom( bg = "gray85" ),
+              strip.left = lattice::strip.custom( bg = "gray85" ),
               par.strip.text = list( cex = 1, lines = 5 ),
               layout = c( 1, length( split_factors ) + 1  ),
               strip = FALSE,
