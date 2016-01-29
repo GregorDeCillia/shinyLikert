@@ -261,16 +261,6 @@ For factror analysis, you can also use the `split_factors` argument.
   )
 ```
 
-```{r, eval = FALSE }
-  plot( 
-    renderShinyLikert( 
-      testData2 ,  
-      dropdown = "question",
-      split    = "country"
-    ) 
-  )
-```
-
 # Grouping data with the likert package
 
 ```{r}

@@ -12,21 +12,21 @@ testData2 = createTestData( 100, 10 )
 
 
 ```{r}
-    fluidPage( 
-      renderShinyLikert( 
-        testData2,
-        split    = c( "difficulty", "gender", "country" ),
-      ) 
-    )
+plot(
+  renderShinyLikert( 
+    testData2,
+    split    = c( "difficulty", "gender", "country" )
+  ) 
+)
 ```
 
 ```{r}
-    fluidPage( 
-      renderShinyLikert( 
-        testData2,
-        height  = c(500,800),
-        dropdown = c("gender","difficulty"),
-        group = "country"
-      ) 
-    )
+plot( 
+  renderShinyLikert( 
+    testData2,
+    height  = c(500,800),
+    dropdown = "difficulty",
+    group = "country"
+  ) 
+)
 ```

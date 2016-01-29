@@ -116,8 +116,8 @@ runtime: shiny
    i = i + 1
  }
 
- # Call renderShinyLikert and output with fluidPage
- fluidPage(
+ # Call renderShinyLikert and plot the result
+ plot(
    renderShinyLikert(
      cattell_data,
      dropdown = c( "question_type" ),
