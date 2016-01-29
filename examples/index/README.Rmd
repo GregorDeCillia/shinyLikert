@@ -32,4 +32,14 @@ Link            | Description
 [ui-server]:      ui-server/
 [hfactors]:       hierachicalFactors/
 
+The example below shows some functionalities of the package and has been included from http://gregor-de-cillia.xyz/shiny/shinyLikert/examples/shinyTest/
+
+```{r results='asis'}
+library(shiny)
+tags$iframe(
+  seamless="seamless",
+  height=800, width=900, frameborder=0,
+  src="./shinyTest/")
+```
+
 <p style='text-align:right;'>[$\Uparrow$](./../)</p>
