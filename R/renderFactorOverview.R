@@ -44,15 +44,40 @@ renderFactorOverview = function(
 {
   input  = get( 'input',   envir=env )
   output = get( 'output',  envir=env )
+
+  selector = inputPanel(
+    selectInput( paste0( id,
+                         "factor" ),
+                 "choose factor",
+                 c(names(data$row_factors),
+                   names(data$column_factors ) )
+    ),
+    sliderInput( paste0( id, "percent" ),
+                 "choose percent",
+                 0, 20, 4,
+                 post = "%" )
+  )
+
+  # quick access to the inputs
   factor = reactive({
     input[[paste0(id,"factor")]]
   })
+  percent = reactive({
+    out = input[[paste0(id,"percent")]]
+    if( is.null(out) )
+      out = 4
+    return( out )
+  })
+
+  factors = union(
+    names( data$row_factors ),
+    names( data$column_factors )
+  )
 
   factor_vec <- reactive({
     factor = factor()
     if( is.null( factor ) ){
-      factor = c(names(data$row_factors),
-                 names(data$column_factors ) )[1]
+      factor = factors[1]
     }
 
     if( factor %in% names( data$row_factors ) )
@@ -70,10 +95,26 @@ renderFactorOverview = function(
       return( "question" )
   })
 
-  #plot = reactive({
-  factor_vec %>%
-    ggvis( x = ~x ,
-           width = "1800px" ) %>%
+  counts = reactive({
+    fv = factor_vec()
+    counts = as.numeric( table( fv ) )
+    df = data.frame( levels = levels( fv[,1] ),
+                     counts,
+                     treshold = sum( counts ) )
+    return( df )
+  })
+
+  counts2 = reactive({
+    cts = counts()
+    cts = cts[ cts$counts/sum(cts$counts) >= percent()/100,  ]
+    cts$levels   = base::factor( cts$levels ) # drop unused factor levels
+    cts$treshold = cts$treshold*percent()/100
+    return( cts )
+  })
+
+  counts2 %>%
+    ggvis( ~levels, ~counts ) %>%
+    layer_paths(~levels, ~treshold, stroke:="red") %>%
     layer_bars( fill               = "sky blue",
                 fillOpacity       := 0.7,
                 fillOpacity.hover := 0.9 ) %>%
@@ -81,14 +122,20 @@ renderFactorOverview = function(
     add_axis( "x", title = "" ) %>%
     add_tooltip( function( df ) {
       if ( df$stack_upr_ > 1 )
-        paste0( df$stack_upr_, " ", quantity(), "s" )
+        paste0( df$stack_upr_,
+                " ",
+                quantity(),
+                "s" )
       else
-        paste0( df$stack_upr_, " ", quantity() )
+        paste0( df$stack_upr_,
+                " ",
+                quantity() )
     },
 
     "hover" ) %>%
     add_tooltip( function( df ) {
-      paste0( 100*df$stack_upr_/length(factor_vec()$x), " %" )
+      paste0( 100*df$stack_upr_/length( factor_vec()$x ),
+              " %" )
     },
 
     "click" ) %>%
@@ -96,10 +143,7 @@ renderFactorOverview = function(
       bind_shiny( paste0(id, "ggvis"),
                   paste0(id, "ggvis_ui" ) )
 
-  selector = selectInput( paste0(id,"factor"), "choose factor",
-                          c(names(data$row_factors),
-                            names(data$column_factors ) )
-  )
+
 
   return( list( selector = selector,
                 plot = ggvisOutput( paste0(id, "ggvis") )
