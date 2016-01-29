@@ -89,7 +89,7 @@ runtime: shiny
 
  rendered2 = renderShinyLikert(
    cattell_data , 
-   dropdown = c( "question" ),
+   dropdown = c( "question_type", "question" ),
    split = c( "source", "gender" ),
    response_levels = c( 
      #"missed",                      # do not plot the missings
@@ -100,8 +100,7 @@ runtime: shiny
      "neither agree not disagree", 
      "agree", 
      "strongly agree" ),
-   as.percent = TRUE,
-   positive.order = TRUE
+   as.percent = TRUE
  )
  rendered2$selector
  rendered2$plot 
@@ -121,7 +120,7 @@ runtime: shiny
  fluidPage(
    renderShinyLikert(
      cattell_data,
-     dropdown = c("question_type" ),
+     dropdown = c( "question_type" ),
      group = "gender",
      as.percent = TRUE,
      height = c(750,1500)
