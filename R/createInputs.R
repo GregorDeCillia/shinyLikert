@@ -5,7 +5,8 @@ createInputs = function( id,
                          column_factors,
                          currentFactors,
                          getInput,
-                         height
+                         height,
+                         group
 )
 {
  reactive({
@@ -37,6 +38,19 @@ createInputs = function( id,
        ),
        selected = selection,
        multiple = TRUE )
+   }
+
+   if( !is.null( group )  ){
+     selection = getInput( ".group", group )
+     out$mulipanel = selectInput(
+       paste0( id, ".group" ),
+       "grouping factor",
+       setdiff(
+         names( row_factors ),
+         dropdown_factors
+       ),
+       selection
+     )
    }
 
    # return as list

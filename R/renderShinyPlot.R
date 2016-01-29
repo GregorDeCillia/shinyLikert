@@ -13,7 +13,8 @@ renderShinyPlot = function( factors,
   getInput  = get( 'getInput',   envir=env )
   reactiveLikertTable = reactive({
     renderTestTable( filtered_data(),
-                     likert_split, split_factors,
+                     getInput( ".group" ),
+                     split_factors,
                      id )
 
   })
@@ -40,8 +41,9 @@ renderShinyPlot = function( factors,
                         )
 
     if( !is.null( likert_split ) ){
-      td = likert::likert( filtered$likert_data,
-                           grouping = filtered$row_factors[ , likert_split ] )
+      td = likert::likert(
+        filtered$likert_data,
+        grouping = filtered$row_factors[ , getInput(".group") ] )
       if( grouping == "HH" )
         return( HH::likert( td ) )
       return( likert::likert.bar.plot( td ) )

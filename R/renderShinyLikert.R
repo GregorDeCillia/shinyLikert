@@ -92,6 +92,7 @@ renderShinyLikert = function( data,
     names(data$row_factors),
     names(data$column_factors)
     )
+
   for ( factor in c( dropdown_factors, split_factors ) )
     if( !( factor %in% valid_factors ) )
       stop( paste( "factor", factor, "invalid" ) )
@@ -104,8 +105,6 @@ renderShinyLikert = function( data,
         return( NULL )
       out = c( out, getInput( factor ) )
     }
-    if ( is.null(out) )  ## bypass error messages by replacing NA with FALSE
-      return ( NULL )
     return( out )
   }
 
@@ -117,7 +116,8 @@ renderShinyLikert = function( data,
                            data$column_factors,
                            currentFactors,
                            getInput,
-                           height            )
+                           height,
+                           group )
 
   # create filtered version of dataset
   filtered_data = reactive({
