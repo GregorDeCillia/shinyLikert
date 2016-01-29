@@ -26,7 +26,7 @@ To create a shiny widget the data is assumed to be of class `likertData`, which 
 ```{r, results='hide', echo=FALSE}
  testData3 = createTestData( participants = 100, 
                               questions    = 10 )
- fluidPage( 
+ plot( 
     renderShinyLikert( testData3 )  
   )
 ```
@@ -76,9 +76,7 @@ The third data frame `column_factors` can be used to classify the questions.
 To display the `likert_data`, use the `renderShinyLikert` function
 
 ```{r}
-  fluidPage( 
-    renderShinyLikert( testData2 )  
-  )
+ plot( renderShinyLikert( testData2 ) )  
 ```
 
 
@@ -176,7 +174,7 @@ shinyApp(
 You can also use `column_factors` exactly as above.
 
 ```{r}
-  fluidPage(
+  plot(
     renderShinyLikert( 
         testData2,
         dropdown = c( "difficulty" )
@@ -190,13 +188,13 @@ You can also use `column_factors` exactly as above.
 To control the height of the plot, use the option `height = c( height_min, height_max )`
 
 ```{r}
-    fluidPage( 
-      renderShinyLikert( 
-        testData2, 
-        dropdown = c( "gender", "country" ),
-        height = c( 300, 600 )
-      ) 
-    )
+  plot( 
+    renderShinyLikert( 
+      testData2, 
+      dropdown = c( "gender", "country" ),
+      height = c( 300, 600 )
+    ) 
+  )
 ```
 
 ## Responselevels
@@ -204,13 +202,13 @@ To control the height of the plot, use the option `height = c( height_min, heigh
 To get a custom order for the responses, use the responselevels parameter
 
 ```{r}
-    fluidPage( 
-      renderShinyLikert( 
-        testData2,
-        dropdown = "gender",
-        response_levels = c( "Strongly Agree", "Agree", "Neutral" )
+  plot( 
+    renderShinyLikert( 
+      testData2,
+      dropdown = "gender",
+      response_levels = c( "Strongly Agree", "Agree", "Neutral" )
       ) 
-    )
+  )
 ```
 
 ## Pass arguments to `HH::likert`
@@ -218,26 +216,26 @@ To get a custom order for the responses, use the responselevels parameter
 You can also pass down arguments down to `HH::likert`
 
 ```{r}
-    fluidPage( 
-      renderShinyLikert( 
-        testData2,
-        dropdown = "country",
-        main = "custom_title",
-        horizontal = FALSE,
-        as.percent = TRUE,
-        positive.order = TRUE
-      ) 
-    )
+  plot( 
+    renderShinyLikert( 
+      testData2,
+      dropdown = "country",
+      main = "custom_title",
+      horizontal = FALSE,
+      as.percent = TRUE,
+      positive.order = TRUE
+    ) 
+  )
 ```
 
 You can also use the names of `column_factors` for the dropdown argument.
 
 ```{r}
-    fluidPage( 
-      renderShinyLikert( 
-        testData2,
-        dropdown = "difficulty"      ) 
-    )
+  plot( 
+    renderShinyLikert( 
+      testData2,
+      dropdown = "difficulty"      ) 
+  )
 ```
 
 ## split_factors
@@ -245,56 +243,56 @@ You can also use the names of `column_factors` for the dropdown argument.
 For factror analysis, you can also use the `split_factors` argument.
 
 ```{r}
-    fluidPage( 
-      renderShinyLikert( 
-        testData2,
-        split    = c( "difficulty", "gender", "country" )
-      ) 
-    )
+  plot( 
+    renderShinyLikert( 
+      testData2,
+      split    = c( "difficulty", "gender", "country" )
+    ) 
+  )
 ```
 
 ```{r}
-    fluidPage( 
-      renderShinyLikert( 
-        testData2 ,  
-        dropdown = "country",
-        split    = "difficulty"
-      ) 
-    )
+  plot( 
+    renderShinyLikert( 
+      testData2 ,  
+      dropdown = "country",
+      split    = "difficulty"
+    ) 
+  )
 ```
 
 ```{r, eval = FALSE }
-    fluidPage( 
-      renderShinyLikert( 
-        testData2 ,  
-        dropdown = "question",
-        split    = "country"
-      ) 
-    )
+  plot( 
+    renderShinyLikert( 
+      testData2 ,  
+      dropdown = "question",
+      split    = "country"
+    ) 
+  )
 ```
 
 # Grouping data with the likert package
 
 ```{r}
-    fluidPage( 
-      renderShinyLikert( 
-        testData2,
-        height  = c(500,800),
-        dropdown = c("gender","difficulty"),
-        group = "country"
-      ) 
-    )
+  plot( 
+    renderShinyLikert( 
+      testData2,
+      height  = c(500,800),
+      dropdown = c("gender","difficulty"),
+      group = "country"
+    ) 
+  )
 ```
 
 ```{r}
-    fluidPage( 
-      renderShinyLikert( 
-        testData2,
-        height  = c(500,800),
-        dropdown = c("country","difficulty"),
-        group = "gender",
-        grouping = "HH"
-      ) 
-    )
+  plot( 
+    renderShinyLikert( 
+      testData2,
+      height  = c(500,800),
+      dropdown = c("country","difficulty"),
+      group = "gender",
+      grouping = "HH"
+    ) 
+  )
 ```
 

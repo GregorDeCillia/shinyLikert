@@ -29,14 +29,14 @@ Now we will add the factor `question` to the `column_factors`
 To print a plot which filters by `difficulty`, `question` and `skill` use this.
 
 ```{r}
-fluidPage(
-  renderShinyLikert( 
-    testData2,
-    dropdown = c( "difficulty",
-                  "question",
-                  "skill" )
+  plot( 
+    renderShinyLikert( 
+      testData2,
+      dropdown = c( "difficulty",
+                    "question",
+                    "skill" )
+    ) 
   )
-)
 ```
 
 Note that the `question` field gets updated as you change the value of `difficulty`. If `easy` is selected, the question selector will let you choose only those questions, that have been rated as `hard` in the questionnarie. `skill` will only let you choose one level since it depends on `question`: every `question` has one `skill` level specified in `column_factors`. If we change the order of the `dropdown_factors` to 
@@ -48,7 +48,7 @@ dropdown_factors = c( "difficulty", "skill", "question" )
 the result will look somehow different.
 
 ```{r}
-fluidPage(
+plot(
   renderShinyLikert( 
     testData2,
     dropdown = dropdown_factors )
@@ -65,7 +65,7 @@ The next widget will show the use of `column_factors` and `row factors` mixed.
 To make the plot more appealing, the `split_factors` input has been used too.
 
 ```{r}
-fluidPage(
+plot(
   renderShinyLikert( 
     testData2,
     dropdown = c( "difficulty",      # this is a column_factor
@@ -80,7 +80,7 @@ Note that if you select `skill` under `split_factors`, only one more bar will ap
 Plotting several items works as well. You will have to exclude `questions` from the `dropdown` input. Note that `split` does not work well with several questions. Therefore, we will replace it with `group`
 
 ```{r}
-fluidPage(
+plot(
   renderShinyLikert( 
     testData2,
     dropdown = c( "difficulty",      # this is a column_factor

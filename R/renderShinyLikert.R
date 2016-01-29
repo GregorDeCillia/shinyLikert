@@ -151,16 +151,19 @@ renderShinyLikert = function( data,
   })
 
   # return
+  out =
   list(
-        selector = selectorUI,
-        plot = renderUI({ tabsetPanel(
-          tabPanel( "plot",
-                    plot
-          ),
-          tabPanel( "table",
-                    table
-          )
-        ) })
+    selector = selectorUI,
+    plot = renderUI({ tabsetPanel(
+      tabPanel( "plot",
+                plot
+      ),
+      tabPanel( "table",
+                table
+      )
+    ) })
   )
+  class( out ) = "shinyLikertOutput"
+  return( out )
 
 }
