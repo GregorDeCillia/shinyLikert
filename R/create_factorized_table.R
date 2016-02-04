@@ -50,8 +50,5 @@ create_factorized_table = function( data_set,
   for ( response in response_levels )
     out[,response] = as.numeric( out[ ,response ] )
 
-  # HH::likert( level ~ . | factor , tabular,
-  #             scales=list(y=list(relation="free")), layout=c(1,2) )
-
   return( out )
 }
