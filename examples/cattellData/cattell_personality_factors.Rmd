@@ -14,62 +14,6 @@ runtime: shiny
   load( "cattell_data.rda")
 ```
 
-
-```{r, eval = FALSE, echo=FALSE, results='hide'}
-  # those are the original import commands. They might be outdated and are neither shown
-  # nor evaluated if you run the rmd file. The data.csv file was downloaded from
-  # the site http://personality-testing.info/_rawdata/
-  
-  # get the likert resplonses
-  data <- read.delim("C:/Users/grogon/Downloads/data.csv")
-  question_columns = 1:163
-  factor_columns   = c( "age", "gender", "country", "source" ) 
-  
-  question_factors = substr( names( data[,question_columns] ), 1, 1)
-  
-  library( shinyLikert )
-  
-  #
-  ld = createLikertData( data[ , question_columns ],
-                         data[ , factor_columns ],
-                         data.frame(  question_type = question_factors ),
-                         c( "missed",
-                            "strongly disagree", 
-                            "disagree", 
-                            "neither agree not disagree", 
-                            "agree", 
-                            "strongly agree" )
-  )
-  
-  # use the first letter of the questions as a factor
-  question_factors = substr( names( ld$likert_data ), 1, 1)
-
-  #get the questions as string vector
-  source( "C:/Users/grogon/workspace/shinyLikert/examples/cartell_questions.R" )
-  names(ld$likert_data) = cartell_questions
-  
-  # mark all NAs as unanswered
-  levels( ld$row_factors$country ) = c( levels( ld$row_factors$country ), 
-                                        "unanswered" )
-  ld$row_factors$country[ is.na( ld$row_factors$country ) ] = "unanswered"
-  
-  # give names to the genders
-  levels( ld$row_factors$gender ) = c( "NA",
-                                       "Male",
-                                       "Female",
-                                       "Other"
-  )
-  
-  # give names to the sources factor
-  c( "from front page of website that hosted the survey",
-     "from google",
-     "facebook",
-     "any url containing '.edu'",
-     "wikipedia",
-     "other source or empty source")
-  
-```
-
 ```{r}
  # display the fator overview
  fluidPage(
