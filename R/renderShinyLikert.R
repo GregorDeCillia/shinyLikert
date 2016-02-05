@@ -119,6 +119,15 @@ renderShinyLikert = function( data,
                            height,
                            group )
 
+  select_test = renderUI({
+    selectInput( paste0(id,".test" ),
+                 "Choose test method",
+                 c( "kruskal willis test",
+                    "chisq test"
+                 )
+    )
+  })
+
   # create filtered version of dataset
   filtered_data = reactive({
     filterDataSet( data,
@@ -154,14 +163,18 @@ renderShinyLikert = function( data,
   out =
   list(
     selector = selectorUI,
-    plot = renderUI({ tabsetPanel(
-      tabPanel( "plot",
-                plot
-      ),
-      tabPanel( "table",
-                table
-      )
-    ) })
+    plot = renderUI({
+      tabsetPanel(
+        tabPanel( "plot",
+                  plot
+        ),
+        tabPanel( "table",
+                  inputPanel(
+                    select_test
+                  ),
+                  table
+        )
+      ) })
   )
   class( out ) = "shinyLikertOutput"
   return( out )
