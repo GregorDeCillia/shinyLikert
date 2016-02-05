@@ -9,8 +9,7 @@ Those examples will illustrate the use of hierachical dropdown menus. The import
 
 ```{r, message = FALSE, results='hide'}
   library(shinyLikert)      # load the package from installed library
-  testData2 = createTestData( participants = 100, 
-                              questions    = 20 )
+  testData2 = createTestData( questions    = 20 )
 ```
 
 Now we will add the factor `question` to the `column_factors`

@@ -15,7 +15,7 @@
 Create a simple likert plot from the data
 }
 \examples{
-testData2 = createTestData( 100, 10 )
+testData2 = createTestData()
 plot( testData2 )
 }
 \author{

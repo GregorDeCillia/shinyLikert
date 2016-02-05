@@ -27,8 +27,8 @@
 #' td$row_factors
 #'
 #' @export
-createTestData = function( participants,
-                           questions,
+createTestData = function( participants = 100,
+                           questions = 10,
                            participant_factors = list( country = c("US","AT","CH"),
                                                        gender = c("Male", "Female" ),
                                                        position = c("Programmer",

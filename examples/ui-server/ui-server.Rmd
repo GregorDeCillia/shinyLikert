@@ -27,8 +27,7 @@ Now a new window will open showing the following output.
          uiOutput( "plot" )
        ),
        server = function(input,output,session){
-         testData3 = createTestData( participants = 100,
-                                     questions    = 10   )
+         testData3 = createTestData()
          rendered = renderFactorOverview(
            testData3
            )
@@ -60,8 +59,7 @@ the `server.R` file should look as follows
 library(shinyLikert)
 shinyServer(
   function(input, output) {
-    testData3 = createTestData( participants = 100,
-                                questions    = 10   )
+    testData3 = createTestData()
     rendered = renderFactorOverview(
       testData3
     )
@@ -100,8 +98,7 @@ shinyApp(
         uiOutput( "rendered" )
       ),
     server = function(input,output,session){
-      testData3 = createTestData( participants = 100, 
-                                  questions    = 10   )
+      testData3 = createTestData()
       rendered = renderShinyLikert( 
         testData3 ,
         dropdown = "gender" )

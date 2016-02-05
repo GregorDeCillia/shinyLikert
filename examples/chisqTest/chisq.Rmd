@@ -5,9 +5,9 @@ output: html_document
 runtime: shiny
 ---
 
-```{r, echo=FALSE, results ='hide', message=FALSE}
+```{r, results ='hide', message=FALSE}
 library( shinyLikert )
-testData2 = createTestData( 100, 10 )
+testData2 = createTestData()
 ```
 
 

@@ -5,7 +5,7 @@
 #' @param x   An object of class likertData
 #' @param ... further arguments. Will be ignored
 #' @examples
-#' testData2 = createTestData( 100, 10 )
+#' testData2 = createTestData()
 #' print( testData2 )
 #' @export
 #' @author Gregor de Cillia
@@ -37,7 +37,7 @@ print.likertData = function( x, ... ){
 #' @param object An object of class likertData
 #' @param ... further arguments for the HH::likert call
 #' @examples
-#' testData2 = createTestData( 100, 10 )
+#' testData2 = createTestData()
 #' summary( testData2 )
 #' @export
 #' @author Gregor de Cillia
@@ -70,7 +70,7 @@ summary.likertData = function( object, ... ){
 #' @param x An object of class likertData
 #' @param ... further arguments for the HH::likert call
 #' @examples
-#' testData2 = createTestData( 100, 10 )
+#' testData2 = createTestData()
 #' plot( testData2 )
 #' @export
 #' @author Gregor de Cillia
