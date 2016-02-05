@@ -27,6 +27,20 @@ runtime: shiny
    question = names(cattell_data$likert_data)
   )
  
+ # only allow observations with frequent ages
+ age = cattell_data$row_factors$age
+ frequent_ages = names(summary(age))[1:3]
+ cattell_data$likert_data  = cattell_data$likert_data[age%in%frequent_ages,]
+ cattell_data$row_factors  = cattell_data$row_factors[age%in%frequent_ages,]
+ cattell_data$row_factors$age = factor( cattell_data$row_factors$age )
+ 
+ #only allow observations with frequent countrys
+ country = cattell_data$row_factors$country
+ frequent_countries = names(summary(country))[1:3]
+ cattell_data$likert_data  = cattell_data$likert_data[country%in%frequent_countries,]
+ cattell_data$row_factors  = cattell_data$row_factors[country%in%frequent_countries,]
+ cattell_data$row_factors$country = factor( cattell_data$row_factors$country )
+ 
  # remove some entries to speed up the server tasks. Note, that this
  # dataset had 49159 participants
  cattell_data$likert_data  = cattell_data$likert_data[1:2000,]
