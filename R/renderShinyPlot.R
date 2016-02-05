@@ -18,7 +18,7 @@ renderShinyPlot = function( factors,
                      split_factors,
                      id,
                      getInput( ".test",
-                               "kruskal willis test" ) )
+                               "kruskal-wallis test" ) )
 
   })
 

@@ -122,7 +122,7 @@ renderShinyLikert = function( data,
   select_test = renderUI({
     selectInput( paste0(id,".test" ),
                  "Choose test method",
-                 c( "kruskal willis test",
+                 c( "kruskal-wallis test",
                     "chisq test"
                  )
     )
