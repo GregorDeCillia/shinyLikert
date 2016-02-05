@@ -45,7 +45,14 @@ renderShinyPlot = function( factors,
         filtered$likert_data,
         grouping = filtered$row_factors[ , getInput(".group") ] )
       if( grouping == "HH" )
-        return( HH::likert( td ) )
+        return( HH::plot.likert(
+          x = Group ~.| Item,
+          data = td$results,
+          layout = c( 1, length( levels( td$results$Item ) ) ),
+          main = currentFactors(),
+          ylab = getInput(".group"),
+          strip = lattice::strip.custom( bg = "gray92" )
+        ) )
       return( likert::likert.bar.plot( td ) )
     }
 
@@ -73,12 +80,13 @@ renderShinyPlot = function( factors,
                              y = list( relation = "free" )
               ),
               main = currentFactors(),
-              strip.left = lattice::strip.custom( bg = "gray85" ),
+              strip.left = lattice::strip.custom( bg = "gray92" ),
               par.strip.text = list( cex = 1, lines = 5 ),
               layout = c( 1, length( split_factors ) + 1  ),
               strip = FALSE,
               ylab = NULL,
               positive.order=TRUE,
+              rightAxis=TRUE,
               ...
       )
     }
