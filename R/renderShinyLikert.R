@@ -75,10 +75,6 @@ renderShinyLikert = function( data,
   input  = get( 'input',   envir=env )
   output = get( 'output',  envir=env )
 
-  # append input and output to dataset
-  data$input  = input
-  data$output = output
-
   # getter function for inputs related to this instance of renderShinyLikert
   getInput = function( str, default = NULL ){
     input_object = input[[ paste0( id, str ) ]]
@@ -149,8 +145,6 @@ renderShinyLikert = function( data,
                           ... )
   plot  = outs$plot
   table = outs$table
-
-  output[[paste0(id,".plot")]] = plot
 
   # use an inputPanel container for the inputs
   selectorUI = renderUI({

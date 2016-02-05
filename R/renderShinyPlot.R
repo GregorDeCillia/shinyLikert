@@ -33,9 +33,6 @@ renderShinyPlot = function( factors,
     likert_table = create_table( filtered$likert_data,
                                  response_levels )
 
-    filtered$output[[ paste0(id, ".factorTable" ) ]] =
-      renderTable( likert_table )
-
     # set default arguments
     defaults <- list( main = currentFactors() )
     args <- modifyList( defaults,
