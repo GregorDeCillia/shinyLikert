@@ -5,11 +5,11 @@ renderTestTable = function( filtered,
                             test_method )
 {
     if( !is.null( likert_split ) ){
-      out = create_factorized_table( filtered,
-                                     likert_split,
-                                     accumulate = FALSE )
-      out = data.frame( out, p.value = NA )
-      for ( question in out$factor[2:nrow(out)] ){
+      out = likert::likert(
+        filtered$likert_data,
+        grouping = filtered$row_factors[ ,likert_split[1] ] )
+      out = cbind( out$results, p.value = NA )
+      for ( question in out$Item ){
         if( test_method == "chisq test" )
           p = chisq.test( filtered$likert_data[, question],
                           filtered$row_factors[ ,likert_split[1] ],
@@ -18,7 +18,7 @@ renderTestTable = function( filtered,
           p = kruskal.test(filtered$likert_data[, question],
                            filtered$row_factors[ ,likert_split[1] ],
                            simulate.p.value = TRUE )$p.value
-        out$p.value[ out$factor == question ] = p
+        out$p.value[ out$Item == question ] = p
       }
 
       row.names( out ) = NULL
@@ -28,7 +28,7 @@ renderTestTable = function( filtered,
       split_factors = filtered$input[[paste0(id,".split_factors")]]
       out = create_factorized_table( filtered,
                                      split_factors )
-      out = data.frame( out, p.value = NA )
+      out = cbind( out, p.value = NA )
       for ( factor in split_factors )
         if( factor %in% names( filtered$row_factors ) ){
           # calculate p value from chi squared test
