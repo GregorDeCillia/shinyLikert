@@ -98,7 +98,7 @@ renderShinyPlot = function( factors,
     list( plot = out,
           table = renderTable({
             likert_table = reactiveLikertTable()
-          })
+          }, include.rownames=FALSE )
 
     )
   )

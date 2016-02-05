@@ -21,7 +21,6 @@ renderTestTable = function( filtered,
         out$p.value[ out$Item == question ] = p
       }
 
-      row.names( out ) = NULL
       return( out )
     }
     if( !is.null( split_factors ) ){
