@@ -19,9 +19,6 @@ createInputs = function( id,
                                    currentFactors()
    )
 
-   # create height slider ( returns NULL if height is not supplied )
-   out$heightSlider = renderHeightSlider( id, height )
-
    # in case split_factors are given, create a multidropdown
    if( ! is.null( split_factors )  ){
      selection = getInput( ".split_factors", split_factors )

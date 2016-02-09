@@ -159,8 +159,11 @@ renderShinyLikert = function( data,
     selector = selectorUI,
     plot = renderUI({
       tabsetPanel(
-        tabPanel( "plot",
-                  plot
+        tabPanel(
+          "plot",
+          # create height slider ( returns NULL if height is not supplied )
+          renderHeightSlider( id, height ),
+          plot
         ),
         tabPanel( "table",
                   inputPanel(
