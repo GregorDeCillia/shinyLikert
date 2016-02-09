@@ -20,7 +20,7 @@ renderTestTable = function( filtered,
                            simulate.p.value = TRUE )$p.value
         out$p.value[ out$Item == question ] = p
       }
-
+      out$Group[ out$Group == "NA" ] = NA
       return( out )
     }
     if( !is.null( split_factors ) ){
