@@ -31,10 +31,7 @@ shinyApp(
         uiOutput( "plot" )
     ),
     server = function(input,output,session){
-        testData3 = createTestData( participants = 100,
-                                    questions    = 10,
-                                    input,
-                                    output )
+        testData3 = createTestData()
         rendered = renderFactorOverview(
             testData3
         )

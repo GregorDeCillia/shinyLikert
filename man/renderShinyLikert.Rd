@@ -65,7 +65,7 @@ shinyApp() or inside an ShinyMarkdown document
           uiOutput( "plot" )
       ),
       server = function( input, output, session ){
-          testData2 = createTestData( 100, 10, input, output )
+          testData2 = createTestData()
           rendered = renderShinyLikert(
               testData2 ,
               dropdown = "gender" )

@@ -15,7 +15,7 @@
 prints a summary about the data
 }
 \examples{
-testData2 = createTestData( 100, 10 )
+testData2 = createTestData()
 summary( testData2 )
 }
 \author{
