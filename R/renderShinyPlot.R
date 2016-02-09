@@ -15,7 +15,7 @@ renderShinyPlot = function( factors,
   reactiveLikertTable = reactive({
     renderTestTable( filtered_data(),
                      getInput( ".group" ),
-                     split_factors,
+                     getInput( ".split_factors"  ),
                      id,
                      getInput( ".test",
                                "kruskal-wallis test" ) )

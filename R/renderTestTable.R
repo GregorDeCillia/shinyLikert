@@ -24,7 +24,6 @@ renderTestTable = function( filtered,
       return( out )
     }
     if( !is.null( split_factors ) ){
-      split_factors = filtered$input[[paste0(id,".split_factors")]]
       out = create_factorized_table( filtered,
                                      split_factors )
       out = cbind( out, p.value = NA )
