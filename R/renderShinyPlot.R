@@ -12,16 +12,7 @@ renderShinyPlot = function( factors,
 ){
   getInput  = get( 'getInput',   envir=env )
 
-  reactiveLikertTable = reactive({
-    renderTestTable( filtered_data(),
-                     getInput( ".group" ),
-                     getInput( ".split_factors"  ),
-                     getInput( ".test",
-                               "kruskal-wallis test" ) )
-
-  })
-
-  out = renderPlot({
+  renderPlot({
     if( is.null( currentFactors() ) && length( factors ) != 0 )
       return( NULL )
 
@@ -97,13 +88,5 @@ renderShinyPlot = function( factors,
     high = getInput( ".height", 450 )
     return ( high )
   }
-  )
-  return(
-    list( plot = out,
-          table = renderTable({
-            likert_table = reactiveLikertTable()
-          }, include.rownames=FALSE )
-
-    )
   )
 }

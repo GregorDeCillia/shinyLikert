@@ -133,7 +133,7 @@ renderShinyLikert = function( data,
   })
 
   # create plot and table ouputs
-  outs = renderShinyPlot( dropdown_factors,
+  plot = renderShinyPlot( dropdown_factors,
                           currentFactors,
                           height,
                           id,
@@ -143,8 +143,17 @@ renderShinyLikert = function( data,
                           grouping,
                           filtered_data,
                           ... )
-  plot  = outs$plot
-  table = outs$table
+
+  # create the rendered table
+  table = renderTable(
+    { renderTestTable( filtered_data(),
+                       getInput( ".group" ),
+                       getInput( ".split_factors"  ),
+                       getInput( ".test",
+                                 "kruskal-wallis test" ) )
+    },
+    include.rownames=FALSE
+  )
 
   # use an inputPanel container for the inputs
   selectorUI = renderUI({
