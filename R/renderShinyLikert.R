@@ -162,6 +162,12 @@ renderShinyLikert = function( data,
     do.call( "inputPanel", selectorList )
   })
 
+  # create input panel for selecting a test in case it is needed
+  if( is.null( split_factors ) && is.null( group ) )
+    test_selector = NULL
+  else
+    test_selector = inputPanel( select_test )
+
   # return
   out =
   list(
@@ -175,9 +181,7 @@ renderShinyLikert = function( data,
           plot
         ),
         tabPanel( "table",
-                  inputPanel(
-                    select_test
-                  ),
+                  test_selector,
                   table
         )
       ) })
