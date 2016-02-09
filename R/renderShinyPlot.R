@@ -16,7 +16,6 @@ renderShinyPlot = function( factors,
     renderTestTable( filtered_data(),
                      getInput( ".group" ),
                      getInput( ".split_factors"  ),
-                     id,
                      getInput( ".test",
                                "kruskal-wallis test" ) )
 

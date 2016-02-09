@@ -1,7 +1,6 @@
 renderTestTable = function( filtered,
                             group,
                             split_factors,
-                            id,
                             test_method )
 {
 #  cat( "likert_data: ", dim( filtered$likert_data ), "\n"  )
