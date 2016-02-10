@@ -34,12 +34,15 @@ renderTestTable = function( filtered,
         if( factor %in% names( filtered$row_factors ) ){
           # calculate p value from chi squared test
           if( test_method == "chisq test" )
-            p = chisq.test( filtered$likert_data[,1],
-                            filtered$row_factors[,factor],
+            p = chisq.test( unlist( filtered$likert_data ),
+                            rep( filtered$row_factors[,factor],
+                                 ncol( filtered$likert_data ) ),
                             simulate.p.value = TRUE )$p.value
           else
-            p = kruskal.test( filtered$likert_data[,1],
-                              filtered$row_factors[,factor] )$p.value
+            p = kruskal.test( unlist( filtered$likert_data),
+                              rep( filtered$row_factors[,factor],
+                                   ncol( filtered$likert_data ) )
+                              )$p.value
           out$p.value[ out$factor == factor ] = p
         }
       return( out )
