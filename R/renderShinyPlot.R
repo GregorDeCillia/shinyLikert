@@ -20,17 +20,6 @@ renderShinyPlot = function( factors,
     # filter the data according to the dropbox inputs
     filtered = filtered_data()
 
-    # in case of an ordinary plot
-    likert_table = create_table( filtered$likert_data,
-                                 response_levels )
-
-    # set default arguments
-    defaults <- list( main = currentFactors() )
-    args <- modifyList( defaults,
-                        list( x = likert_table,
-                              ... )
-                        )
-
     if( !is.null( likert_split ) ){
       td = likert::likert(
         filtered$likert_data,
@@ -48,6 +37,17 @@ renderShinyPlot = function( factors,
     }
 
     if( is.null( split_factors ) ){
+      # in case of an ordinary plot
+      likert_table = create_table( filtered$likert_data,
+                                   response_levels )
+
+      # set default arguments
+      defaults <- list( main = currentFactors() )
+      args <- modifyList( defaults,
+                          list( x = likert_table,
+                                ... )
+      )
+
       if( is.null(likert_table)  )
         return( NULL )
       return( do.call( getFromNamespace("likert","HH"), args ) )
