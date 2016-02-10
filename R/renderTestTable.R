@@ -3,7 +3,16 @@ renderTestTable = function( filtered,
                             split_factors,
                             test_method )
 {
-#  cat( "likert_data: ", dim( filtered$likert_data ), "\n"  )
+  if( test_method == "chisq test" )
+    test_function = function( item, factor ){
+      chisq.test( item, factor,
+                  simulate.p.value = TRUE )$p.value
+    }
+  else{
+    test_function = function( item, factor ){
+      kruskal.test( item, factor )$p.value
+    }
+  }
 
     if( !is.null( group ) ){
       out = likert::likert(
@@ -11,14 +20,8 @@ renderTestTable = function( filtered,
         grouping = filtered$row_factors[ ,group[1] ] )
       out = cbind( out$results, p.value = NA )
       for ( question in out$Item ){
-        if( test_method == "chisq test" )
-          p = chisq.test( filtered$likert_data[, question],
-                          filtered$row_factors[ ,group[1] ],
-                          simulate.p.value = TRUE )$p.value
-        else
-          p = kruskal.test(filtered$likert_data[, question],
-                           filtered$row_factors[ ,group[1] ],
-                           simulate.p.value = TRUE )$p.value
+        p = test_function( filtered$likert_data[, question],
+                           filtered$row_factors[ ,group[1] ] )
         out$p.value[ out$Item == question ] = p
       }
       out$Group[ out$Group == "NA" ] = NA
@@ -32,17 +35,11 @@ renderTestTable = function( filtered,
       out = cbind( out, p.value = NA )
       for ( factor in split_factors )
         if( factor %in% names( filtered$row_factors ) ){
-          # calculate p value from chi squared test
-          if( test_method == "chisq test" )
-            p = chisq.test( unlist( filtered$likert_data ),
-                            rep( filtered$row_factors[,factor],
-                                 ncol( filtered$likert_data ) ),
-                            simulate.p.value = TRUE )$p.value
-          else
-            p = kruskal.test( unlist( filtered$likert_data),
-                              rep( filtered$row_factors[,factor],
-                                   ncol( filtered$likert_data ) )
-                              )$p.value
+          p = test_function(
+            unlist( filtered$likert_data ),
+            rep( filtered$row_factors[,factor],
+                 ncol( filtered$likert_data ) )
+          )
           out$p.value[ out$factor == factor ] = p
         }
       return( out )
