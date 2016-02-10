@@ -13,6 +13,7 @@
 #'                    group,
 #'                    grouping,
 #'                    id,
+#'                    wrap,
 #'                    ...
 #'                  )
 #'
@@ -29,6 +30,8 @@
 #' @param group    variables to group the plot
 #' @param grouping chooses wether HH or likert will be used to display
 #'                 the result
+#' @param id       an id
+#' @param wrap     apply wraping for text on the y-Axis.
 #' @param ... further arguments to be passed down to HH::likert
 #'
 #' @return  A list of rendered shiny objects which can be used as outputs.
@@ -61,6 +64,7 @@ renderShinyLikert = function( data,
                               grouping = "likert",
                               id = toString(paste0("id",
                                                    sample(1:10000, 1))),
+                              wrap = 30,
                               ... ){
   env = parent.frame()
 
@@ -135,6 +139,7 @@ renderShinyLikert = function( data,
                           group,
                           grouping,
                           filtered_data,
+                          wrap,
                           ... )
 
   # create the rendered table

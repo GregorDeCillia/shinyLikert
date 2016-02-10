@@ -7,9 +7,10 @@ renderShinyPlot = function( factors,
                             likert_split,
                             grouping,
                             filtered_data,
-                            env = parent.frame(),
+                            wrap,
                             ...
 ){
+  env = parent.frame()
   getInput  = get( 'getInput',   envir=env )
 
   renderPlot({
