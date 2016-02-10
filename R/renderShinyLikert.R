@@ -8,9 +8,6 @@
 #'                    dropdown_factors = NULL,
 #'                    questions = names( data$likert_data ),
 #'                    height = NULL,
-#'                    env = parent.frame(),
-#'                    quoted = FALSE,
-#'                    expr = "NULL",
 #'                    response_levels = levels( data$likert_data[,1] ),
 #'                    split_factors = NULL,
 #'                    group,
@@ -27,9 +24,6 @@
 #' @param questions the questions that should be displayed. (Currently broken)
 #' @param height minimum and maximum height of the plot in px. Setting this option
 #' will create a slider to control the height of the plot.
-#' @param env argument to be used by the shiny runtime
-#' @param quoted argument to be used by the shiny runtime
-#' @param expr argument to be used by the shiny runtime
 #' @param response_levels answer possibilities of interest
 #' @param split_factors factors to be used in the HH plot
 #' @param group    variables to group the plot
@@ -61,9 +55,6 @@ renderShinyLikert = function( data,
                               dropdown_factors = NULL,
                               questions = names( data$likert_data ),
                               height = NULL,
-                              env = parent.frame(),
-                              quoted = FALSE,
-                              expr = "NULL",
                               response_levels = levels( data$likert_data[,1] ),
                               split_factors = NULL,
                               group = NULL,
@@ -71,6 +62,8 @@ renderShinyLikert = function( data,
                               id = toString(paste0("id",
                                                    sample(1:10000, 1))),
                               ... ){
+  env = parent.frame()
+
   # break scoping here. always be careful with those calls
   input  = get( 'input',   envir=env )
   output = get( 'output',  envir=env )

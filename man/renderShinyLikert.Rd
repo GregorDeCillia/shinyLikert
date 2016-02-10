@@ -8,9 +8,6 @@ renderShinyLikert( data,
                    dropdown_factors = NULL,
                    questions = names( data$likert_data ),
                    height = NULL,
-                   env = parent.frame(),
-                   quoted = FALSE,
-                   expr = "NULL",
                    response_levels = levels( data$likert_data[,1] ),
                    split_factors = NULL,
                    group,
@@ -29,12 +26,6 @@ the dropdown menus}
 
 \item{height}{minimum and maximum height of the plot in px. Setting this option
 will create a slider to control the height of the plot.}
-
-\item{env}{argument to be used by the shiny runtime}
-
-\item{quoted}{argument to be used by the shiny runtime}
-
-\item{expr}{argument to be used by the shiny runtime}
 
 \item{response_levels}{answer possibilities of interest}
 

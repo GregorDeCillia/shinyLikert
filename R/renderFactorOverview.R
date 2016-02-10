@@ -2,10 +2,6 @@
 #'
 #' @param data   the datasetto be shown
 #' @param id     a unique id of the output
-#' @param env    argument for shiny session
-#' @param quoted argument for shiny session
-#' @param expr   argument for shiny session
-#' @param ...    argument for shiny session
 #'
 #' @examples
 #' \dontrun{
@@ -33,12 +29,11 @@
 renderFactorOverview = function(
   data,
   id= toString(paste0("id",
-                      sample(1:10000, 1))),
-  env = parent.frame(),
-  quoted = FALSE,
-  expr= "NULL",
-  ... )
+                      sample(1:10000, 1)))
+  )
 {
+  env = parent.frame()
+
   input  = get( 'input',   envir=env )
   output = get( 'output',  envir=env )
 
