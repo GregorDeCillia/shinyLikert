@@ -94,10 +94,6 @@ renderShinyPlot = function( factors,
 
   },
   height = function(){
-    if( is.null( height ) )
-      return( 450 )
-    high = getInput( ".height", 450 )
-    return ( high )
-  }
+    getInput( ".height", 450 ) }
   )
 }
