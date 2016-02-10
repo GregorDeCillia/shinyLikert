@@ -88,4 +88,15 @@ runtime: shiny
      height = c(750,1500)
    )
  )
+ 
+  plot(
+   renderShinyLikert(
+     cattell_data,
+     dropdown = c( "question_type" ),
+     group = "gender",
+     grouping = "HH",
+     as.percent = TRUE,
+     height = c(750,1500)
+   )
+ )
 ```
