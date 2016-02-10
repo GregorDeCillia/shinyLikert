@@ -13,6 +13,8 @@ renderShinyLikert( data,
                    group,
                    grouping,
                    id,
+                   wrap,
+                   custom_tests,
                    ...
                  )
 }
@@ -38,6 +40,11 @@ the result}
 
 \item{id}{A string definig the id of the output. The id has to be
 unique within your project}
+
+\item{wrap}{apply wraping for text on the y-Axis.}
+
+\item{custom_tests}{a list containing tests to be applied in the table
+output}
 
 \item{...}{further arguments to be passed down to HH::likert}
 }

@@ -30,3 +30,18 @@ plot(
   ) 
 )
 ```
+
+
+```{r}
+plot(
+  renderShinyLikert( 
+    testData2,
+    split    = c( "difficulty", "gender", "country" ),
+    custom_tests = list( 
+      anova =  function(item,factor){
+          anova( lm( as.numeric(item) ~ factor ) )$`Pr(>F)`[1]
+      } 
+    )
+  ) 
+)
+```

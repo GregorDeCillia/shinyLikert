@@ -1,7 +1,8 @@
 renderTestTable = function( filtered,
                             group,
                             split_factors,
-                            test_method )
+                            test_method,
+                            custom_tests )
 {
   if( test_method == "chisq test" )
     test_function = function( item, factor ){
@@ -13,6 +14,8 @@ renderTestTable = function( filtered,
       kruskal.test( item, factor )$p.value
     }
   }
+  if( test_method %in% names(custom_tests) )
+    test_function = custom_tests[[ test_method ]]
 
   if( !is.null( group ) ){
     out = likert::likert(

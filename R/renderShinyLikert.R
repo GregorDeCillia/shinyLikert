@@ -14,11 +14,10 @@
 #'                    grouping,
 #'                    id,
 #'                    wrap,
+#'                    custom_tests,
 #'                    ...
 #'                  )
 #'
-#' @param id A string definig the id of the output. The id has to be
-#' unique within your project
 #' @param data An object of type likertData to be plotted
 #' @param dropdown_factors names ot the factors which should be used as for
 #' the dropdown menus
@@ -30,8 +29,11 @@
 #' @param group    variables to group the plot
 #' @param grouping chooses wether HH or likert will be used to display
 #'                 the result
-#' @param id       an id
+#' @param id A string definig the id of the output. The id has to be
+#' unique within your project
 #' @param wrap     apply wraping for text on the y-Axis.
+#' @param custom_tests a list containing tests to be applied in the table
+#'                     output
 #' @param ... further arguments to be passed down to HH::likert
 #'
 #' @return  A list of rendered shiny objects which can be used as outputs.
@@ -65,6 +67,7 @@ renderShinyLikert = function( data,
                               id = toString(paste0("id",
                                                    sample(1:10000, 1))),
                               wrap = 30,
+                              custom_tests = NULL,
                               ... ){
   env = parent.frame()
 
@@ -116,7 +119,8 @@ renderShinyLikert = function( data,
     selectInput( paste0(id,".test" ),
                  "Choose test method",
                  c( "kruskal-wallis test",
-                    "chisq test"
+                    "chisq test",
+                    names( custom_tests )
                  )
     )
   })
@@ -148,7 +152,8 @@ renderShinyLikert = function( data,
                        getInput( ".group" ),
                        getInput( ".split_factors"  ),
                        getInput( ".test",
-                                 "kruskal-wallis test" ) )
+                                 "kruskal-wallis test" ),
+                       custom_tests )
     },
     include.rownames=FALSE
   )
