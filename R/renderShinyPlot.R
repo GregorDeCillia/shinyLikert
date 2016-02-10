@@ -66,6 +66,16 @@ renderShinyPlot = function( factors,
         # combinations are chosen
         return( NULL )
       likert_table2$factor = as.character( likert_table2$factor )
+      likert_table2$level  = as.character( likert_table2$level  )
+      for ( i in 1:nrow( likert_table2 ) )
+        likert_table2$level[i] = paste(
+          strwrap(
+            likert_table2$level[i],
+            wrap
+          ),
+          collapse = "\n"
+        )
+
       HH::likert( level ~ . | factor, likert_table2,
               scales = list( cex = 1,
                              y = list( relation = "free" )
