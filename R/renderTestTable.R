@@ -41,6 +41,19 @@ renderTestTable = function( filtered,
                ncol( filtered$likert_data ) )
         )
         out$p.value[ out$factor == factor ] = p
+      } else{
+        fac  = filtered$column_factors[,factor]
+        fac2 = NULL
+        for ( i in 1:length( fac ) )
+          fac2 = c( fac2,
+                    rep( fac[i],
+                         nrow( filtered$likert_data ) )
+          )
+        p = test_function(
+          unlist( filtered$likert_data ),
+          fac2
+        )
+        out$p.value[ out$factor == factor ] = p
       }
     return( out )
   }
