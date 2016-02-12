@@ -115,13 +115,12 @@ renderShinyLikert = function( data,
                            height,
                            group )
 
+  testMap = createTestMap( custom_tests )
+
   select_test = renderUI({
     selectInput( paste0(id,".test" ),
                  "Choose test method",
-                 c( "kruskal-wallis test",
-                    "chisq test",
-                    names( custom_tests )
-                 )
+                 names( testMap )
     )
   })
 
@@ -148,12 +147,15 @@ renderShinyLikert = function( data,
 
   # create the rendered table
   table = renderTable(
-    { renderTestTable( filtered_data(),
+    {
+      test_method   = getInput( ".test",
+                              "kruskal-wallis test" )
+      test_function = testMap[[ test_method ]]
+
+      renderTestTable( filtered_data(),
                        getInput( ".group" ),
                        getInput( ".split_factors"  ),
-                       getInput( ".test",
-                                 "kruskal-wallis test" ),
-                       custom_tests )
+                       test_function )
     },
     include.rownames=FALSE
   )

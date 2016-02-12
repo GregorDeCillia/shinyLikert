@@ -1,30 +1,16 @@
 renderTestTable = function( filtered,
                             group,
                             split_factors,
-                            test_method,
-                            custom_tests )
+                            test_function )
 {
-  if( test_method == "chisq test" )
-    test_function = function( item, factor ){
-      chisq.test( item, factor,
-                  simulate.p.value = TRUE )$p.value
-    }
-  else{
-    test_function = function( item, factor ){
-      kruskal.test( item, factor )$p.value
-    }
-  }
-  if( test_method %in% names(custom_tests) )
-    test_function = custom_tests[[ test_method ]]
-
   if( !is.null( group ) ){
     out = likert::likert(
       filtered$likert_data,
       grouping = filtered$row_factors[ ,group[1] ] )
     out = cbind( out$results, p.value = NA )
     for ( question in out$Item ){
-      p = test_function( filtered$likert_data[, question],
-                         filtered$row_factors[ ,group[1] ] )
+      p = test_function( filtered$likert_data[ , question],
+                         filtered$row_factors[ , group ] )
       out$p.value[ out$Item == question ] = p
     }
     out$Group[ out$Group == "NA" ] = NA
