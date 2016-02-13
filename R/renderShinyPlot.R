@@ -30,16 +30,24 @@ renderShinyPlot = function( factors,
       td = likert::likert(
         filtered$likert_data,
         grouping = filtered$row_factors[ , getInput(".group") ] )
-      if( grouping == "HH" )
-        return( HH::plot.likert(
+      if( grouping == "HH" ){
+        defaults = list(
           x = Group ~.| Item,
           data = td$results,
           layout = c( 1, length( levels( td$results$Item ) ) ),
           main = currentFactors(),
           ylab = getInput(".group"),
           strip = lattice::strip.custom( bg = "gray92" )
-        ) )
-      return( likert::likert.bar.plot( td ) )
+        )
+        args = modifyList( defaults, ellipsis )
+        return(
+          do.call( getFromNamespace( "plot.likert", "HH"), args )
+        )
+      }
+      args = modifyList( list(l = td), ellipsis )
+      return(
+        do.call( getFromNamespace("likert.bar.plot","likert"), args )
+      )
     }
 
     if( is.null( split_factors ) ){
@@ -53,7 +61,7 @@ renderShinyPlot = function( factors,
       ellipsis$x = likert_table
 
       args = modifyList( defaults,
-                          ellipsis )
+                         ellipsis )
 
       if( is.null(likert_table)  )
         return( NULL )
