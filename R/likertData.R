@@ -68,15 +68,17 @@ summary.likertData = function( object, ... ){
 #' Create a simple likert plot from the data
 #'
 #' @param x An object of class likertData
-#' @param ... further arguments for the HH::likert call
+#' @param ... further arguments passed down to the HH::likert call
 #' @examples
 #' testData2 = createTestData()
 #' plot( testData2 )
+#' plot( testData2, positive.order = TRUE )
 #' @export
 #' @author Gregor de Cillia
 plot.likertData = function( x,
                             ... ){
-  HH::likert( summary( unlist( x$likert_data ) ),
-              main = deparse(substitute( x ) ) )
+  HH::likert( likert::likert( x$likert_data ),
+              main = deparse(substitute( x ) ),
+              ... )
 }
 

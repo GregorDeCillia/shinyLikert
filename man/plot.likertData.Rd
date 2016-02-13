@@ -17,6 +17,7 @@ Create a simple likert plot from the data
 \examples{
 testData2 = createTestData()
 plot( testData2 )
+plot( testData2, positive.order = TRUE )
 }
 \author{
 Gregor de Cillia
