@@ -6,6 +6,17 @@ createTestMap = function( custom_tests = NULL ){
     "chisq test"          = function( item, factor ){
       chisq.test( item, factor,
                   simulate.p.value = TRUE )$p.value
+    },
+    "wilcox test"         = function( item, factor ){
+      item = as.numeric( item )
+      levels = levels( factor )
+      p = rep( NA, length( levels ) )
+      for ( i in 1:length( levels ) ){
+        binary_factor = levels[i] == factor
+        p[i] = wilcox.test( item[ binary_factor ],
+                            item[!binary_factor ] )$p.value
+      }
+      return( p )
     }
   )
 

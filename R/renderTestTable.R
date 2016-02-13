@@ -40,7 +40,7 @@ renderTestTable = function( filtered,
           )
         p = test_function(
           unlist( filtered$likert_data ),
-          fac2
+          factor( fac2 )
         )
         out$p.value[ out$factor == factor ] = p
       }
