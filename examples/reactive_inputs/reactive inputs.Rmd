@@ -23,5 +23,17 @@ plot(
 
 ```
 
+```{r, chunk2 }
+textInput( "main2", "main2", "my main" )
+checkboxInput( "as.percent", "as.percent" )
+library( shinyLikert )
+
+plot(
+  renderShinyLikert( createTestData(),
+                     main =  reactive({input$main2}),
+                     as.percent = reactive({input$as.percent}),
+                     split = "gender" )
+)
+```
 
 

@@ -14,6 +14,12 @@ renderShinyPlot = function( factors,
   getInput  = get( 'getInput',   envir=env )
 
   renderPlot({
+    ellipsis = list( ... )
+    for( element in names( ellipsis ) ){
+      if( is.reactive( ellipsis[[element]] ) )
+        ellipsis[[element]] = ellipsis[[element]]()
+    }
+
     if( is.null( currentFactors() ) && length( factors ) != 0 )
       return( NULL )
 
@@ -44,15 +50,9 @@ renderShinyPlot = function( factors,
       # set default arguments
       defaults <- list( main = currentFactors() )
 
-      ellipsis = list( ... )
-      for( element in names( ellipsis ) ){
-        if( is.reactive( ellipsis[[element]] ) )
-          ellipsis[[element]] = ellipsis[[element]]()
-      }
-
       ellipsis$x = likert_table
 
-      args <- modifyList( defaults,
+      args = modifyList( defaults,
                           ellipsis )
 
       if( is.null(likert_table)  )
@@ -83,20 +83,26 @@ renderShinyPlot = function( factors,
           collapse = "\n"
         )
 
-      HH::likert( level ~ . | factor, likert_table2,
-              scales = list( cex = 1,
-                             y = list( relation = "free" )
-              ),
-              main = currentFactors(),
-              strip.left = lattice::strip.custom( bg = "gray92" ),
-              par.strip.text = list( cex = 1, lines = 5 ),
-              layout = c( 1, length( split_factors ) + 1  ),
-              strip = FALSE,
-              ylab = NULL,
-              positive.order=TRUE,
-              rightAxis=TRUE,
-              ...
+      defaults = list(
+        x = level ~ . | factor,
+        data = likert_table2,
+        scales = list( cex = 1,
+                       y = list( relation = "free" )
+        ),
+        main = currentFactors(),
+        strip.left = lattice::strip.custom( bg = "gray92" ),
+        par.strip.text = list( cex = 1, lines = 5 ),
+        layout = c( 1, length( split_factors ) + 1  ),
+        strip = FALSE,
+        ylab = NULL,
+        positive.order=TRUE,
+        rightAxis=TRUE
       )
+
+      args = modifyList( defaults,
+                          ellipsis )
+
+      return( do.call( getFromNamespace("likert","HH"), args ) )
     }
 
   },
