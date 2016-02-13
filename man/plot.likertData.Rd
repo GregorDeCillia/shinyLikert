@@ -9,15 +9,15 @@
 \arguments{
 \item{x}{An object of class likertData}
 
-\item{...}{further arguments for the HH::likert call}
+\item{...}{further arguments passed down to the HH::likert call}
 }
 \description{
 Create a simple likert plot from the data
 }
 \examples{
-testData2 = createTestData()
-plot( testData2 )
-plot( testData2, positive.order = TRUE )
+testData = createTestData()
+plot( testData )
+plot( testData, positive.order = TRUE )
 }
 \author{
 Gregor de Cillia

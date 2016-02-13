@@ -20,7 +20,7 @@ The widgets include interactive inputs to alter the plot. An interactive output 
 
 ```{r, eval = FALSE}
 fluidPage( renderShinyLikert( 
-  testData2,
+  createTestData(),
   dropdown = "country" )
 )
 ```

@@ -8,8 +8,8 @@ runtime: shiny
 ```{r, message=FALSE}
 
   library( shinyLikert )
-  testData2 = createTestData()
-  rendered = renderFactorOverview( testData2 )
+  testData = createTestData()
+  rendered = renderFactorOverview( testData )
   rendered$selector
   rendered$plot
 
@@ -17,7 +17,7 @@ runtime: shiny
 
 ```{r}
   
-  fluidPage( renderFactorOverview(testData2) )
+  fluidPage( renderFactorOverview( testData ) )
   
 ```
 

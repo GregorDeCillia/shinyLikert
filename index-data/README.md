@@ -11,14 +11,14 @@ likert_table = likert::likert( td$likert_data )
 HH::likert( x = likert_table$results )
 ```
 
-![](README_files/figure-html/unnamed-chunk-1-1.png)
+![](README_files/figure-html/unnamed-chunk-1-1.png) 
 
 The widgets include interactive inputs to alter the plot. An interactive output might look like this
 
 
 ```r
 fluidPage( renderShinyLikert( 
-  testData2,
+  createTestData(),
   dropdown = "country" )
 )
 ```

@@ -7,14 +7,14 @@ runtime: shiny
 
 ```{r, results ='hide', message=FALSE}
 library( shinyLikert )
-testData2 = createTestData()
+testData = createTestData()
 ```
 
 
 ```{r}
 plot(
   renderShinyLikert( 
-    testData2,
+    testData,
     split    = c( "difficulty", "gender", "country" )
   ) 
 )
@@ -23,7 +23,7 @@ plot(
 ```{r}
 plot( 
   renderShinyLikert( 
-    testData2,
+    testData,
     height  = c(500,800),
     dropdown = "difficulty",
     group = "country"
@@ -35,7 +35,7 @@ plot(
 ```{r}
 plot(
   renderShinyLikert( 
-    testData2,
+    testData,
     split    = c( "difficulty", "gender", "country" ),
     custom_tests = list( 
       anova =  function(item,factor){

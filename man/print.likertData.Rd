@@ -15,8 +15,8 @@
 prints some information about the data
 }
 \examples{
-testData2 = createTestData()
-print( testData2 )
+testData = createTestData()
+print( testData )
 }
 \author{
 Gregor de Cillia

@@ -66,9 +66,9 @@ a "shiny-markdown" document
           uiOutput( "plot" )
       ),
       server = function( input, output, session ){
-          testData2 = createTestData()
+          testData = createTestData()
           rendered = renderShinyLikert(
-              testData2 ,
+              testData,
               dropdown = "gender" )
           output$plot     = rendered$plot
           output$selector = rendered$selector

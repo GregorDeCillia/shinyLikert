@@ -15,8 +15,8 @@
 prints a summary about the data
 }
 \examples{
-testData2 = createTestData()
-summary( testData2 )
+testData = createTestData()
+summary( testData )
 }
 \author{
 Gregor de Cillia

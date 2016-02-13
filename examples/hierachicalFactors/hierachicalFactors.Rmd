@@ -9,18 +9,18 @@ Those examples will illustrate the use of hierachical dropdown menus. The import
 
 ```{r, message = FALSE, results='hide'}
   library(shinyLikert)      # load the package from installed library
-  testData2 = createTestData( questions    = 20 )
+  testData = createTestData( questions    = 20 )
 ```
 
 Now we will add the factor `question` to the `column_factors`
 
 ```{r}
   
-  testData2$column_factors = cbind( 
-    testData2$column_factors, 
+  testData$column_factors = cbind( 
+    testData$column_factors, 
     question = 
-      factor( rownames( testData2$column_factors ),
-              rownames( testData2$column_factors )
+      factor( rownames( testData$column_factors ),
+              rownames( testData$column_factors )
       )
   )
 ```
@@ -30,7 +30,7 @@ To print a plot which filters by `difficulty`, `question` and `skill` use this.
 ```{r}
   plot( 
     renderShinyLikert( 
-      testData2,
+      testData,
       dropdown = c( "difficulty",
                     "question",
                     "skill" )
@@ -49,7 +49,7 @@ the result will look somehow different.
 ```{r}
 plot(
   renderShinyLikert( 
-    testData2,
+    testData,
     dropdown = dropdown_factors )
 )
 ```
@@ -57,7 +57,7 @@ plot(
 Now if `difficulty` is set to `hard`  and `skill` is set to `logic`, the `question` field lets you choose among all `hard` questions which are related to `logic`. So far we only used `column_factors` i.e. factors related to the `questions`. `row_factors`, i.e. factors related to the participants can be used in the same way. The options for this dataset are 
 
 ```{r}
-names( testData2$row_factors )
+names( testData$row_factors )
 ```
 
 The next widget will show the use of `column_factors` and `row factors` mixed.
@@ -66,7 +66,7 @@ To make the plot more appealing, the `split_factors` input has been used too.
 ```{r}
 plot(
   renderShinyLikert( 
-    testData2,
+    testData,
     dropdown = c( "difficulty",      # this is a column_factor
                   "question",        # this is a column_factor
                   "country" ),       # this is a row_factor
@@ -81,7 +81,7 @@ Plotting several items works as well. You will have to exclude `questions` from 
 ```{r}
 plot(
   renderShinyLikert( 
-    testData2,
+    testData,
     dropdown = c( "difficulty",      # this is a column_factor
                   "skill",
                   #"question",        # this is a column_factor
