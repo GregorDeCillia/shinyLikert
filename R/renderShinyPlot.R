@@ -43,10 +43,17 @@ renderShinyPlot = function( factors,
 
       # set default arguments
       defaults <- list( main = currentFactors() )
+
+      ellipsis = list( ... )
+      for( element in names( ellipsis ) ){
+        if( is.reactive( ellipsis[[element]] ) )
+          ellipsis[[element]] = ellipsis[[element]]()
+      }
+
+      ellipsis$x = likert_table
+
       args <- modifyList( defaults,
-                          list( x = likert_table,
-                                ... )
-      )
+                          ellipsis )
 
       if( is.null(likert_table)  )
         return( NULL )
