@@ -8,40 +8,42 @@ renderShinyLikert( data,
                    dropdown_factors = NULL,
                    questions = names( data$likert_data ),
                    height = NULL,
-                   response_levels = levels( data$likert_data[,1] ),
+                   response_levels = levels( data$likert_data[ , 1 ] ),
                    split_factors = NULL,
-                   group,
-                   grouping,
-                   id,
-                   wrap,
-                   custom_tests,
+                   group = NULL,
+                   grouping = "likert",
+                   id = toString( sample( 10^15, 1 ) ),
+                   wrap = 30,
+                   custom_tests = NULL,
                    ...
                  )
 }
 \arguments{
-\item{data}{An object of type likertData to be plotted}
+\item{data}{an object of class likertData to be plotted}
 
-\item{dropdown_factors}{names ot the factors which should be used as for
-the dropdown menus}
+\item{dropdown_factors}{a character vector containing names of the factors which
+should be used for the dropdown menus}
 
 \item{questions}{the questions that should be displayed. (Currently broken)}
 
-\item{height}{minimum and maximum height of the plot in px. Setting this option
-will create a slider to control the height of the plot.}
+\item{height}{minimum and maximum height of the plot in px. Setting this
+option will create a slider to control the height of the
+plot.}
 
-\item{response_levels}{answer possibilities of interest}
+\item{response_levels}{answer possibilities to be plotted and tested}
 
 \item{split_factors}{factors to be used in the HH plot}
 
 \item{group}{variables to group the plot}
 
-\item{grouping}{chooses wether HH or likert will be used to display
-the result}
+\item{grouping}{decides wether the package HH or the package likert
+will be used to display the result. Only relevant if
+group has been set}
 
-\item{id}{A string definig the id of the output. The id has to be
+\item{id}{a string definig the id of the output. The id has to be
 unique within your project}
 
-\item{wrap}{apply wraping for text on the y-Axis.}
+\item{wrap}{apply wraping for text on the y-Axis (factor levels).}
 
 \item{custom_tests}{a list containing tests to be applied in the table
 output}
@@ -52,11 +54,12 @@ output}
 A list of rendered shiny objects which can be used as outputs.
 }
 \description{
-Creates a list of rendered shiny outputs to be used inside a call to
-shinyApp() or inside an ShinyMarkdown document
+Creates a list of rendered shiny outputs to be used in a shiny app or
+a "shiny-markdown" document
 }
 \examples{
 \dontrun{
+  library( shiny )
   shinyApp(
       ui= fluidPage(
           uiOutput( "selector" ),
@@ -70,8 +73,7 @@ shinyApp() or inside an ShinyMarkdown document
           output$plot     = rendered$plot
           output$selector = rendered$selector
       }
-  )
-}
+  ) }
 }
 \author{
 Gregor de Cillia

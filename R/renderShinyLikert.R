@@ -1,44 +1,47 @@
 #' Shiny likert
 #'
-#' Creates a list of rendered shiny outputs to be used inside a call to
-#' shinyApp() or inside an ShinyMarkdown document
+#' Creates a list of rendered shiny outputs to be used in a shiny app or
+#' a "shiny-markdown" document
 #'
 #' @usage
 #' renderShinyLikert( data,
 #'                    dropdown_factors = NULL,
 #'                    questions = names( data$likert_data ),
 #'                    height = NULL,
-#'                    response_levels = levels( data$likert_data[,1] ),
+#'                    response_levels = levels( data$likert_data[ , 1 ] ),
 #'                    split_factors = NULL,
-#'                    group,
-#'                    grouping,
-#'                    id,
-#'                    wrap,
-#'                    custom_tests,
+#'                    group = NULL,
+#'                    grouping = "likert",
+#'                    id = toString( sample( 10^15, 1 ) ),
+#'                    wrap = 30,
+#'                    custom_tests = NULL,
 #'                    ...
 #'                  )
 #'
-#' @param data An object of type likertData to be plotted
-#' @param dropdown_factors names ot the factors which should be used as for
-#' the dropdown menus
-#' @param questions the questions that should be displayed. (Currently broken)
-#' @param height minimum and maximum height of the plot in px. Setting this option
-#' will create a slider to control the height of the plot.
-#' @param response_levels answer possibilities of interest
-#' @param split_factors factors to be used in the HH plot
-#' @param group    variables to group the plot
-#' @param grouping chooses wether HH or likert will be used to display
-#'                 the result
-#' @param id A string definig the id of the output. The id has to be
-#' unique within your project
-#' @param wrap     apply wraping for text on the y-Axis.
-#' @param custom_tests a list containing tests to be applied in the table
-#'                     output
-#' @param ... further arguments to be passed down to HH::likert
+#' @param data             an object of class likertData to be plotted
+#' @param dropdown_factors a character vector containing names of the factors which
+#'                         should be used for the dropdown menus
+#' @param questions        the questions that should be displayed. (Currently broken)
+#' @param height           minimum and maximum height of the plot in px. Setting this
+#'                         option will create a slider to control the height of the
+#'                         plot.
+#' @param response_levels  answer possibilities to be plotted and tested
+#' @param split_factors    factors to be used in the HH plot
+#' @param group            variables to group the plot
+#' @param grouping         decides wether the package HH or the package likert
+#'                         will be used to display the result. Only relevant if
+#'                         group has been set
+#' @param id               a string definig the id of the output. The id has to be
+#'                         unique within your project
+#' @param wrap             apply wraping for text on the y-Axis (factor levels).
+#' @param custom_tests     a list containing tests to be applied in the table
+#'                         output
+#' @param ...              further arguments to be passed down to HH::likert
 #'
 #' @return  A list of rendered shiny objects which can be used as outputs.
 #' @examples
 #' \dontrun{
+#'   library( shiny )
 #'   shinyApp(
 #'       ui= fluidPage(
 #'           uiOutput( "selector" ),
@@ -52,20 +55,18 @@
 #'           output$plot     = rendered$plot
 #'           output$selector = rendered$selector
 #'       }
-#'   )
-#' }
+#'   ) }
 #' @export
 #' @author Gregor de Cillia
 renderShinyLikert = function( data,
                               dropdown_factors = NULL,
                               questions = names( data$likert_data ),
                               height = NULL,
-                              response_levels = levels( data$likert_data[,1] ),
+                              response_levels = levels( data$likert_data[ , 1 ] ),
                               split_factors = NULL,
                               group = NULL,
                               grouping = "likert",
-                              id = toString(paste0("id",
-                                                   sample(1:10000, 1))),
+                              id = toString( sample( 10^15, 1 ) ),
                               wrap = 30,
                               custom_tests = NULL,
                               ... ){
