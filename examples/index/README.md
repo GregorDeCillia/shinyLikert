@@ -17,6 +17,7 @@ Link            | Description
 [factorOverview]| Demonstration of the `renderFactorOverview` function
 [ui-server]     | Shows how to use this package in a ui/server setup
 [hfactors]      | Gives an overview how several dropdown factors interact
+[reactiveInputs]| Demonstartes how to pass reactive expressions to renderShinyLikert
 
 
 [misc]:           misc/
@@ -27,6 +28,7 @@ Link            | Description
 [factorOverview]: factorOverview/
 [ui-server]:      ui-server/
 [hfactors]:       hierachicalFactors/
+[reactiveInputs]: reactive_inputs/
 
 The example below shows some functionalities of the package and has been included from http://gregor-de-cillia.xyz/shiny/shinyLikert/examples/shinyTest/
 
