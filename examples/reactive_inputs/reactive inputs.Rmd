@@ -1,0 +1,27 @@
+---
+title: "Reactive Inputs"
+author: "Gregor de Cillia"
+output: html_document
+runtime: shiny
+---
+
+
+```{r, chunk1, eval = FALSE }
+textInput( "main", "main", "my main" )
+checkboxInput( "horizontal", "horizontal" )
+library( shinyLikert )
+
+plot(
+  renderShinyLikert( createTestData(),
+                     main =  reactive({input$main}),
+                     horizontal = reactive({input$horizontal}),
+                     as.percent = TRUE )
+)
+```
+
+```{r, ref.label='chunk1', echo=FALSE}
+
+```
+
+
+
