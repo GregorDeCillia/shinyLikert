@@ -17,6 +17,10 @@ createTestMap = function( custom_tests = NULL ){
                             item[!binary_factor ] )$p.value
       }
       return( p )
+    },
+    "levene test"        = function( item, factor ){
+      car::leveneTest( as.numeric( item),
+                       factor )$'Pr(>F)'[1]
     }
   )
 
