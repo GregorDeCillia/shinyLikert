@@ -82,3 +82,10 @@ plot.likertData = function( x,
               ... )
 }
 
+subset.likertData = function( x, subset, select, drop = FALSE, ... ){
+  x$likert_data    = x$likert_data[ subset, select ]
+  x$row_factors    = x$row_factors[ subset, ]
+  x$column_factors = x$column_factors[ select, ]
+  return( x )
+}
+
