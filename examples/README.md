@@ -2,9 +2,15 @@
 Gregor de Cillia  
 
 Here you will find some examples of the usage of shinyLikert. Each example uses one folder and is written in shiny-markdown format (.Rmd). To run the examples onine, visit 
+<<<<<<< HEAD
 
 http://gregor-de-cillia.xyz/shiny/shinyLikert/examples/.
 
+=======
+
+http://gregor-de-cillia.xyz/shiny/shinyLikert/examples/.
+
+>>>>>>> 1a3e5b928702880c133f049db43ea3b8e0242e4c
 If you want to run those examples locally on your computer, you will have to install shinyLikert. To install the library, type the following in your terminal.
 
 ```r
