@@ -1,15 +1,19 @@
 # shinyLikert examples
 Gregor de Cillia  
 
-Here you will find some examples of the usage of shinyLikert. If you want to run those examples yourself, you will have to istall shinyLikert like so
+Here you will find some examples of the usage of shinyLikert. Each example uses one folder and is written in shiny-markdown format (.Rmd). To run the examples onine, visit 
 
+http://gregor-de-cillia.xyz/shiny/shinyLikert/examples/.
+
+If you want to run those examples locally on your computer, you will have to install shinyLikert. To install the library, type the following in your terminal.
 
 ```r
-devtools::install_github("gregorDeCillia/shinyLikert")
+devtools::install_github( "gregorDeCillia/shinyLikert" )
 ```
 
+Then open one of the the examples in RStudio and strart it using the "Run Document" button.
 
-Link            | Description
+Example         | Description
 ----------------|------------------------------
 [misc]          | Simple examples on how to use shinyLikert
 [cattellData]   | Quick overview of [Cattell's 16 Personality Factors Test]. The raw data can be found [here].
@@ -30,17 +34,5 @@ Link            | Description
 [hfactors]:       hierachicalFactors/
 [reactiveInputs]: reactive_inputs/
 
-The example below shows some functionalities of the package and has been included from http://gregor-de-cillia.xyz/shiny/shinyLikert/examples/shinyTest/
 
 
-```r
-library(shiny)
-tags$iframe(
-  seamless="seamless",
-  height=800, width=900, frameborder=0,
-  src="./shinyTest/")
-```
-
-<!--html_preserve--><iframe seamless="seamless" height="800" width="900" frameborder="0" src="./shinyTest/"></iframe><!--/html_preserve-->
-
-<p style='text-align:right;'>[$\Uparrow$](./../)</p>
