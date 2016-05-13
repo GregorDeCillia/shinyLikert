@@ -21,8 +21,8 @@ createLikertData = function( likert_scale_questions,
   nquestions = dim(likert_scale_questions)[2]
   likert_data = likert_scale_questions
   for ( i in 1:nquestions ){
-    likert_data[ ,i ] = factor( likert_data[ , i ] )
-    levels( likert_data[ , i ] ) = response_levels
+    likert_data[ ,i ] = factor( likert_data[ , i ],
+                                levels = response_levels )
   }
 
   row_factors = participant_factors
